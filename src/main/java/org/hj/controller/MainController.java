@@ -15,5 +15,12 @@ public class MainController {
 		return "map";
 	}
 	
+	// 로그인 페이지
+	@GetMapping("/main")
+	public String main() {
+		System.out.println("메인");
+		return "main";
+	}
+	
 
 }
