@@ -19,7 +19,7 @@
     
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f468622924673dc01ef6bebbdeacc4a2"></script>
     <script>
-        var domain = 'https://i1.daumcdn.net';
+        //var domain = 'https://i1.daumcdn.net';
         var path = '../resources/img/';
 
         function getTileImage(x, y) {
