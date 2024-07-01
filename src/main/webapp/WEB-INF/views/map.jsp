@@ -20,7 +20,7 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f468622924673dc01ef6bebbdeacc4a2"></script>
     <script>
         //var domain = 'https://i1.daumcdn.net';
-        var path = '../resources/img/';
+        var path = '../resources/IMG/';
 
         function getTileImage(x, y) {
             var imageMap = {
@@ -76,7 +76,7 @@
         var infowindow = new kakao.maps.InfoWindow({
             content: '병원내 현재 나의 위치'
         });
-        infowindow.open(map, marker);
+        
         
         
         function moveMap(direction) {
@@ -100,6 +100,7 @@
 
            /*  map.setCenter(moveLatLon); */
             marker.setPosition(moveLatLon);
+            infowindow.open(map, marker);
         }
     </script>
 </body>
