@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Main</title>
-<link rel="stylesheet" href="../resources/CSS/main.css?ver=1">
+<title>간호사 회원가입</title>
+<link rel="stylesheet" href="../resources/CSS/signNurse.css?ver=1">
 </head>
 <body>
   <div class="container">
@@ -25,16 +25,52 @@
     	
     </div>
     <div class="content">
-    	<div class="text">
-    		위치찾기 서비스는 로그인 후 이용 가능합니다.
-    	</div>
-    	<div class="login">
-    		<form action="/login">
-    			<input type="submit" value="로그인">
-    		</form>
-    		<form action="/sign">
-    			<input type="submit" value="회원가입">
-    		</form>
+    	<div class="sign">
+    		<table>
+    			<tr>
+    				<td><input type="text" name="id" placeholder="아이디" class="id"></td>
+    			</tr>
+    		</table>
+    		<table>
+    			<tr>
+    				<td><input type="password" name="pw" placeholder="비밀번호" class="pw"></td>
+    			</tr>
+    		</table>
+    		<table>
+    			<tr>
+    				<td><input type="text" name="name" placeholder="이름" class="name"></td>
+    			</tr>
+    		</table>
+    		<table>
+    			<tr>
+    				<td><input type="text" name="phone" placeholder="전화번호" class="phone"></td>
+    			</tr>
+    		</table>
+    		<table>
+    			<tr>
+    				<td>
+    					 <select class="s_team" name="s_team">
+								<option value="" disabled selected>진료과</option>
+								<option>내과</option>
+								<option>외과</option>
+								<option>소아과</option>
+								<option>피부과</option>
+								<option>안과</option>
+								<option>치과</option>
+								<!-- 추가 진료과목들 -->
+						</select>
+					</td>
+    			</tr>
+    		</table>
+    		<table>
+    			<tr>
+    				<td>
+    				<form action="">
+    				<input type="submit" class="signBtn" value="회원가입">
+    				</form>
+    				</td>
+    			</tr>
+    		</table>
     	</div>
     </div>
   </div>
