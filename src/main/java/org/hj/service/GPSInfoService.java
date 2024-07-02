@@ -1,8 +1,7 @@
 package org.hj.service;
 
-import org.springframework.stereotype.Service;
-
+import org.hj.model.GPSInfoVO;
 
 public interface GPSInfoService {
-	public void sendLatLon();
+	public void sendLatLon(GPSInfoVO gvo);
 }

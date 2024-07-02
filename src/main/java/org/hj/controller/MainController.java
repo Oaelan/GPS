@@ -56,7 +56,7 @@ public class MainController {
 			}
 			else {
 				String s_team = (ls.login(uvo)).getS_team();
-				session.setAttribute("id", (ls.login(uvo)).getId());
+				session.setAttribute("userId", (ls.login(uvo)).getId());
 				session.setAttribute("name", (ls.login(uvo)).getName());
 				session.setAttribute("s_team", s_team);
 				
@@ -117,4 +117,21 @@ public class MainController {
 		System.out.println("입원 환자 등록 페이지");
 		return "patientADD";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 좌표 연습 페이지
+		@GetMapping("/Map2")
+		public String Map2() {
+			System.out.println("좌표 연습");
+			return "Map2";
+		}
 }
