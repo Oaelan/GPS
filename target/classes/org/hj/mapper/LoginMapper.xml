@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+  <mapper namespace="org.hj.mapper.LoginMapper">
+  	
+  	<!--  로그인할 때 값을 가져옴 -->	
+  	<select id="login" resultType="org.hj.model.UserVO">
+  		select id, name, s_team
+  		from user
+  		where id=#{id} and pw=#{pw}
+  	</select>
+  
+
+  	
+  </mapper>

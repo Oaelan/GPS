@@ -1,5 +1,10 @@
 package org.hj.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.hj.model.UserVO;
+import org.hj.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MainController {
 	
 
+	@Autowired
+	private LoginService ls;
+	
 	// 메인 페이지
 	@GetMapping("/")
 	public String main() {
@@ -37,6 +45,36 @@ public class MainController {
 		System.out.println("로그인 하러 가기");
 		return "login";
 	}
+	
+	@PostMapping("/login")
+	public String gologinSuccess(HttpSession session, UserVO uvo) {
+		System.out.println("로그인 컨트롤러");
+			// 로그인 페이지 이동
+			if (ls.login(uvo) == null) {
+				System.out.println("아이디 없어서 다시 로그인 페이지로");
+				return "login";
+			}
+			else {
+				String s_team = (ls.login(uvo)).getS_team();
+				session.setAttribute("id", (ls.login(uvo)).getId());
+				session.setAttribute("name", (ls.login(uvo)).getName());
+				session.setAttribute("s_team", s_team);
+				
+				if (s_team.equals("")) {
+					return "loginSuccess";
+				}
+				
+				else if (s_team.equals("master")) {
+					return "loginSuccessNurse";
+				}
+				
+				else {
+					return "loginSuccessNurse";
+				}
+			}
+		
+	}
+	
 
 	// 환자 회원가입 페이지
 	@GetMapping("/sign")
