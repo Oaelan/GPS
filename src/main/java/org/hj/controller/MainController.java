@@ -17,12 +17,19 @@ public class MainController {
 	}
 	
 	
-	// 로그인 성공 페이지
-		@GetMapping("/loginSuccess")
-		public String loginSuccess() {
-			System.out.println("로그인 성공");
-			return "loginSuccess";
-		}
+	// 환자 로그인 성공 페이지
+	@GetMapping("/loginSuccess")
+	public String loginSuccess() {
+		System.out.println("환자 로그인 성공");
+		return "loginSuccess";
+	}
+		
+	// 간호사 로그인 성공 페이지
+	@GetMapping("/loginSuccessNurse")
+	public String loginSuccessNurse() {
+		System.out.println("간호사 로그인 성공");
+		return "loginSuccess";
+	}
 		
 	// 로그인 페이지
 	@GetMapping("/login")
@@ -43,5 +50,26 @@ public class MainController {
 	public String signNurse() {
 		System.out.println("간호사 회원가입 하러 가기");
 		return "signNurse";
+	}
+	
+	// 병원 소개
+	@GetMapping("/introduce")
+	public String introduce() {
+		System.out.println("병원 소개");
+		return "introduce";
+	}
+	
+	// 오시는 길
+	@GetMapping("/ComingRoute")
+	public String ComingRoute() {
+		System.out.println("오시는 길");
+		return "ComingRoute";
+	}
+	
+	// 병원 내 길찾기
+	@GetMapping("/FindRoute")
+	public String FindRoute() {
+		System.out.println("병원 내 길찾기");
+		return "FindRoute";
 	}
 }
