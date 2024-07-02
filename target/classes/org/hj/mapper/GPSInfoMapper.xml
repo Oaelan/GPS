@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 위도 경도 추가 -->
+	<insert id="sendLatLon"
+		parameterType="org.hj.model.GPSInfoVO">
+		INSERT INTO  gps_info (id, x, y)
+		VALUES (#{id}, #{x}, #{y})
+	</insert>
