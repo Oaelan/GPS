@@ -11,7 +11,8 @@
 </head>
 <body>
   <div class="container">
-    <div class="StateBar">
+  	<jsp:include page="header.jsp"></jsp:include>
+    <!-- <div class="StateBar">
     	
     	<img src="../resources/IMG/wifi.png" class="wifi">
     	<img src="../resources/IMG/battery.png" class="battery">
@@ -24,7 +25,7 @@
     	</div>
     	<img src="../resources/IMG/user2.png" class="user" onclick="openUserMenu()">
     	
-    </div>
+    </div> -->
     <div class="content">
     	<div class="text">
     		<h2>오시는 길</h2>
@@ -34,7 +35,7 @@
     	</div>
     </div>
   </div>
-   <div id="slideMenu" class="slide-menu">
+<!--    <div id="slideMenu" class="slide-menu">
       <a href="#" class="closebtn" onclick="closeMenu()">&times;</a>
 		<ul>
 			<li><a href="/ComingRoute">오시는 길</a></li>
@@ -49,6 +50,6 @@
       <li><a href="/MyPage">마이페이지</a></li>
     </ul>
   </div>
-  <script src="../resources/JS/main.js"></script>
+  <script src="../resources/JS/main.js"></script> -->
 </body>
 </html>

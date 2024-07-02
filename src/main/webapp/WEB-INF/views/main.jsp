@@ -10,7 +10,8 @@
 </head>
 <body>
   <div class="container">
-    <div class="StateBar">
+  <jsp:include page="header.jsp"></jsp:include>
+    <!-- <div class="StateBar">
     	
     	<img src="../resources/IMG/wifi.png" class="wifi">
     	<img src="../resources/IMG/battery.png" class="battery">
@@ -23,7 +24,7 @@
     	</div>
     	<img src="../resources/IMG/user.png" class="user" onclick="openUserMenu()">
     	
-    </div>
+    </div> -->
     <div class="content">
     	<div class="text">
     		위치찾기 서비스는 로그인 후 이용 가능합니다.
@@ -38,7 +39,7 @@
     	</div>
     </div>
   </div>
-   <div id="slideMenu" class="slide-menu">
+<!--    <div id="slideMenu" class="slide-menu">
       <a href="#" class="closebtn" onclick="closeMenu()">&times;</a>
 		<ul>
 			<li><a href="/ComingRoute">오시는 길</a></li>
@@ -53,6 +54,6 @@
       <li><a href="/sign">회원가입</a></li>
     </ul>
   </div>
-  <script src="../resources/JS/main.js"></script>
+  <script src="../resources/JS/main.js"></script> -->
 </body>
 </html>
