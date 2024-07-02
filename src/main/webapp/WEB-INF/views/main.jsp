@@ -41,16 +41,16 @@
    <div id="slideMenu" class="slide-menu">
       <a href="#" class="closebtn" onclick="closeMenu()">&times;</a>
 		<ul>
-			<li><a href="ComingRoute.jsp">오시는 길</a></li>
-			<li><a href="FindRoute.jsp">병원 내 길찾기</a></li>
-			<li><a href="introduce.jsp">병원소개</a></li>
+			<li><a href="/ComingRoute">오시는 길</a></li>
+			<li><a href="/FindRoute">병원 내 길찾기</a></li>
+			<li><a href="/introduce">병원소개</a></li>
 		</ul>
 	</div>
 	<div id="userMenu" class="user-menu">
     <a href="#" class="closebtn" onclick="closeUserMenu()">&times;</a>
     <ul>
-      <li><a href="#">로그인</a></li>
-      <li><a href="#">회원가입</a></li>
+      <li><a href="/login">로그인</a></li>
+      <li><a href="/sign">회원가입</a></li>
     </ul>
   </div>
   <script src="../resources/JS/main.js"></script>
