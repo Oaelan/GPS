@@ -9,17 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MainController {
 	
 
-	// 길찾기 페이지
-	@GetMapping("/")
-	public String map() {
-		System.out.println("길찾기");
-		return "map";
-	}
-	
 	// 메인 페이지
-	@GetMapping("/main")
+	@GetMapping("/")
 	public String main() {
-		System.out.println("메인");
+		System.out.println("메인 화면");
 		return "main";
 	}
 	
