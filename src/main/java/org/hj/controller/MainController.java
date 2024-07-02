@@ -72,4 +72,11 @@ public class MainController {
 		System.out.println("병원 내 길찾기");
 		return "FindRoute";
 	}
+	
+	// 입원 환자 등록 페이지
+	@GetMapping("/patientADD")
+	public String patientADD() {
+		System.out.println("입원 환자 등록 페이지");
+		return "patientADD";
+	}
 }
