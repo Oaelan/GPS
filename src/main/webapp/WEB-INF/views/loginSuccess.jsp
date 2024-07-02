@@ -49,15 +49,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="StateBar">
-			<img src="../resources/IMG/wifi.png" class="wifi"> <img src="../resources/IMG/battery.png" class="battery">
-			<div class="time">12:00</div>
-		</div>
-		<div class="Menu">
-			<img src="../resources/IMG/menu_bar.png" class="menuBar" onclick="toggleMenu()">
-			<div class="title">Green Hospital</div>
-			<img src="../resources/IMG/user2.png" class="user" onclick="openUserMenu()">
-		</div>
+		<jsp:include page="header.jsp"></jsp:include>
 		<div class="content">
 			<div class="dropdown">
 				<select id="floorSelect" onchange="selectFloor()">
@@ -78,21 +70,6 @@
 				<input type="button" value="↑" onclick="moveMap('up')"> <input type="button" value="↓" onclick="moveMap('down')"> <input type="button" value="←" onclick="moveMap('left')"> <input type="button" value="→" onclick="moveMap('right')">
 			</div>
 		</div>
-	</div>
-	<div id="slideMenu" class="slide-menu">
-		<a href="#" class="closebtn" onclick="closeMenu()">&times;</a>
-		<ul>
-			<li><a href="/ComingRoute">오시는 길</a></li>
-			<li><a href="/FindRoute">병원 내 길찾기</a></li>
-			<li><a href="/introduce">병원소개</a></li>
-		</ul>
-	</div>
-	<div id="userMenu" class="user-menu">
-		<a href="#" class="closebtn" onclick="closeUserMenu()">&times;</a>
-		<ul>
-			<li><a href="/">로그아웃</a></li>
-			<li><a href="/MyPage">마이페이지</a></li>
-		</ul>
 	</div>
 	<script src="../resources/JS/main.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f468622924673dc01ef6bebbdeacc4a2"></script>
@@ -125,7 +102,7 @@
         var screenWidth = window.innerWidth ||
                           document.documentElement.clientWidth ||
                           document.body.clientWidth;
-        return (screenWidth > 768) ? 600 : 600; // 필요한 경우 조정
+        return (screenWidth > 768) ? 600 : 580; // 필요한 경우 조정
     }
     var tileSize = getTileSize();
 
@@ -147,7 +124,7 @@
         projectionId: null,
         mapTypeId: kakao.maps.MapTypeId.PLAN,
         $scale: false,
-        center: new kakao.maps.Coords(650, -650),
+        center: new kakao.maps.Coords(580, -550),
         level: 1
     });
     var center = map.getCenter();
