@@ -152,7 +152,7 @@
            console.log(typeof(latlng.getLat()), latlng.getLng());
            
            
-           /* 위도 경도 보내기 */
+          /* 
            fetch('/sendLatLon', {
          	  method: 'POST', // HTTP 요청 메소드
          	  headers: {
@@ -165,7 +165,7 @@
          	})
          	  .then(response => response.json())  // 응답을 JSON으로 변환
          	  .then(data => console.log(data))    // 변환된 데이터를 콘솔에 출력
-         	  .catch(error => console.error('Error:', error));  // 오류 처리
+         	  .catch(error => console.error('Error:', error));  // 오류 처리 */
       }
     </script>
     

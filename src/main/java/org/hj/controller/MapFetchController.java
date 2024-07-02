@@ -16,7 +16,7 @@ public class MapFetchController {
 	
 	// 위도 경도 저장 컨트롤러
     @PostMapping("/sendLatLon")
-    public ResponseEntity<String> sendLatLon() {
+    public ResponseEntity<String> sendLatLon(GPSInfoService gs) {
         System.out.println("위도 경도 저장 컨트롤러");
         gs.sendLatLon();
         return ResponseEntity.ok("위도 경도 저장 완료");
