@@ -77,8 +77,7 @@
 			
 			<div class="map">	    
 				<div id="outShell">
-					<div id="mapshell">
-   					 
+					<div id="mapshell"> 					 
         				<div id="map"></div>
    					
 					</div>
