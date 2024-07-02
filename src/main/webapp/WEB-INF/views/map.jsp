@@ -5,17 +5,35 @@
 <meta charset="utf-8">
 <title>커스텀 타일셋1</title>
 <style type="text/css">
+* {
+	margin: 0;
+	padding: 0p;
+	box-sizing: border-box;
+}
+
+.controls {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#mapshell {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 </style>
 </head>
 <body>
-    <div id="map" style="width: 100%; height: 800px;"></div>
-    
-    <div class="controls">
+	<div id="mapshell">
+		<div id="map" style="width: 100%; height: 700px;"></div>
+	</div>
+	<div class="controls">
     <input type="button" value="↑" onclick="moveMap('up')">
     <input type="button" value="↓" onclick="moveMap('down')">
     <input type="button" value="←" onclick="moveMap('left')">
     <input type="button" value="→" onclick="moveMap('right')">
-</div>
+	</div>
     
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f468622924673dc01ef6bebbdeacc4a2"></script>
     <script>
@@ -72,11 +90,11 @@
             position:  new kakao.maps.Coords(400, -1000)
         });
         marker.setMap(map);
-
-        var infowindow = new kakao.maps.InfoWindow({
+		/* 
+		 var infowindow = new kakao.maps.InfoWindow({
             content: '병원내 현재 나의 위치'
         });
-        
+         */
         
         
         function moveMap(direction) {
@@ -100,7 +118,8 @@
 
            /*  map.setCenter(moveLatLon); */
             marker.setPosition(moveLatLon);
-            infowindow.open(map, marker);
+          	
+            /* infowindow.open(map, marker); */
         }
     </script>
 </body>
