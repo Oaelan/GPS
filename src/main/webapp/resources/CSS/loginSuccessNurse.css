@@ -121,7 +121,7 @@ body {
     }
 
     .container {
-        width: 360px;
+        width: 100vw;
         height: 600px;
     }
 
@@ -185,8 +185,10 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 360px;
+    width: 100vw;
     height: 500px;
+    position: relative;
+    top: 50px;
 }
 
 
