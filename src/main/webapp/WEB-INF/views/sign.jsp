@@ -15,22 +15,22 @@
     	<div class="sign">
     		<table>
     			<tr>
-    				<td><input type="text" name="id" placeholder=" 아이디" class="id"></td>
+    				<td><input type="text" name="id" placeholder="아이디" class="id"></td>
     			</tr>
     		</table>
     		<table>
     			<tr>
-    				<td><input type="password" name="pw" placeholder=" 비밀번호" class="pw"></td>
+    				<td><input type="password" name="pw" placeholder="비밀번호" class="pw"></td>
     			</tr>
     		</table>
     		<table>
     			<tr>
-    				<td><input type="text" name="name" placeholder=" 이름" class="name"></td>
+    				<td><input type="text" name="name" placeholder="이름" class="name"></td>
     			</tr>
     		</table>
     		<table>
     			<tr>
-    				<td><input type="text" name="phone" placeholder=" 전화번호" class="phone"></td>
+    				<td><input type="text" name="phone" placeholder="전화번호" class="phone"></td>
     			</tr>
     		</table>
     		<table>
