@@ -14,9 +14,9 @@
 
 		<div class="content">
 			<div class="login">
-				<form action="">
-					<input type="text" placeholder="아이디" class="id">
-					<input type="text" placeholder="비밀번호" class="pw">
+				<form action="login" method = "POST">
+					<input type="text" placeholder="아이디" name = "id" class="id">
+					<input type="text" placeholder="비밀번호" name = "pw" class="pw">
 					<input type="submit" value="로그인" class="loginBtn">
 				</form>
 			</div>
