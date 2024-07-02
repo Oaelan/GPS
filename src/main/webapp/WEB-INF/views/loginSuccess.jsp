@@ -62,13 +62,12 @@
     </div>
     <div class="content">
 			<div class="dropdown">
-				<button class="dropbtn" id="dropbtn">층별 안내</button>
-				<div class="dropdown-content">
-					<a href="#" onclick="selectFloor('1층')">1층</a> 
-					<a href="#" onclick="selectFloor('2층')">2층</a>
-					<a href="#" onclick="selectFloor('3층')">3층</a>
-					<a href="#" onclick="selectFloor('4층')">4층</a>
-				</div>
+				 <select id="floorSelect" onchange="selectFloor()">
+			        <option value="1" class = "floor">1층</option>
+			        <option value="2" class = "floor">2층</option>
+			        <option value="3" class = "floor">3층</option>
+			        <option value="4" class = "floor">4층</option>
+   				</select>
 			</div>
 			<div class="map">	    
 				<div id="outShell">
@@ -98,7 +97,7 @@
 	<div id="userMenu" class="user-menu">
     <a href="#" class="closebtn" onclick="closeUserMenu()">&times;</a>
     <ul>
-      <li><a href="/main">로그아웃</a></li>
+      <li><a href="/">로그아웃</a></li>
       <li><a href="/MyPage">마이페이지</a></li>
     </ul>
   </div>
@@ -108,7 +107,8 @@
     	// 병원 내 길찾기 지도
         //var domain = 'https://i1.daumcdn.net';
         var path = '../resources/IMG/';
-        function getTileImage(x, y) {
+        
+       /*  function getTileImage(x, y) {
             var imageMap = {
                 '0_0': '1.png',
                 '1_0': '2.png',
@@ -117,21 +117,22 @@
             };
             return path + imageMap[x + '_' + y];
         }
-        
+         */
         
         // 화면 너비에 따라 타일 크기 결정
         function getTileSize() {
             var screenWidth = window.innerWidth ||
                               document.documentElement.clientWidth ||
                               document.body.clientWidth;
-            return (screenWidth > 768) ? 300 : 300; // 필요한 경우 조정
+            return (screenWidth > 768) ? 600 : 600; // 필요한 경우 조정
         }
         var tileSize = getTileSize();
+        
         var plan = function(x, y, z) {
             y = -y - 1; // y 좌표 변환
             // z 레벨 1일 때 타일 범위 제한 (0,0), (1,0), (0,1), (1,1)
             if (z === 1 && x >= 0 && x <= 1 && y >= 0 && y <= 1) {
-                return getTileImage(x, y);
+                return path + "for P_Map.png"; /* getTileImage(x, y); */
             } else {
                 return 'https://i1.daumcdn.net/dmaps/apis/white.png';
             }
@@ -179,8 +180,12 @@
            /*  map.setCenter(moveLatLon); */
             marker.setPosition(moveLatLon);
           	
-            /* infowindow.open(map, marker); */
+            /* infowindow.open(map, marker); */         
         }
+         
+      // 버튼 클릭에 따라 지도 이동 기능을 막거나 풀고 싶은 경우에는 map.setDraggable 함수를 사용합니다
+       map.setDraggable(false);    
+     
     </script>
 </body>
 </html>

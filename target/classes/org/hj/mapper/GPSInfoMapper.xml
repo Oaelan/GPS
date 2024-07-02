@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- 위도 경도 추가 -->
-	<insert id="sendLatLon"
-		parameterType="org.hj.model.GPSInfoVO">
-		INSERT INTO  gps_info (id, x, y)
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hj.mapper.GPSInfoMapper">
+	<!-- 위도 경도 추가 -->
+	<insert id="sendLatLon" parameterType="org.hj.model.GPSInfoVO">
+		INSERT INTO gps_info (id,
+		x, y)
 		VALUES (#{id}, #{x}, #{y})
 	</insert>
+</mapper>

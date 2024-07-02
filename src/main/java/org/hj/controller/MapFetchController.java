@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MapFetchController {
 	
 	@Autowired
-	private GPSInfoVO gvo;
+	GPSInfoVO gvo;
 	
 	
 	// 위도 경도 저장 컨트롤러

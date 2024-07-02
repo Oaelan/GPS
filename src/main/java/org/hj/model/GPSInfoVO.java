@@ -1,5 +1,9 @@
 package org.hj.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
+
 public class GPSInfoVO {
 	
 	private String id;
