@@ -15,26 +15,56 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	gap:30px;
+	
+}
+
+.controls input[type=button] {
+	width: 70px;
+	height: 70px;
+	font-size: 30px;
+	text-align: center;
 }
 
 #mapshell {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 600px;
+	margin-top: 200px;
+}
+
+#outShell {
+	width: 100%;
+	height: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+
+#AllShell {
+	display: flex;
+	gap: 150px;
+	flex-direction: column;
 }
 </style>
 </head>
 <body>
-	<div id="mapshell">
-		<div id="map" style="width: 100%; height: 700px;"></div>
+<div id="AllShell">
+	<div id="outShell">
+		<div id="mapshell">
+			<div id="map" style="width: 100%; height: 700px;"></div>
+		</div>
 	</div>
+	
 	<div class="controls">
-    <input type="button" value="↑" onclick="moveMap('up')">
-    <input type="button" value="↓" onclick="moveMap('down')">
-    <input type="button" value="←" onclick="moveMap('left')">
-    <input type="button" value="→" onclick="moveMap('right')">
+	    <input type="button" value="↑" onclick="moveMap('up')">
+	    <input type="button" value="↓" onclick="moveMap('down')">
+	    <input type="button" value="←" onclick="moveMap('left')">
+	    <input type="button" value="→" onclick="moveMap('right')">
 	</div>
-    
+</div>    
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f468622924673dc01ef6bebbdeacc4a2"></script>
     <script>
         //var domain = 'https://i1.daumcdn.net';

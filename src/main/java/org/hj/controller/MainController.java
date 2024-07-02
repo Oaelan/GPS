@@ -23,6 +23,13 @@ public class MainController {
 		return "main";
 	}
 	
+	
+	// 메인 페이지
+		@GetMapping("/loginSuccess")
+		public String loginSuccess() {
+			System.out.println("로그인 성공");
+			return "loginSuccess";
+		}
 
 	
 }
