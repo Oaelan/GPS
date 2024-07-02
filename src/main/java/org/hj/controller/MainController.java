@@ -28,7 +28,7 @@ public class MainController {
 	@GetMapping("/loginSuccessNurse")
 	public String loginSuccessNurse() {
 		System.out.println("간호사 로그인 성공");
-		return "loginSuccess";
+		return "loginSuccessNurse";
 	}
 		
 	// 로그인 페이지
