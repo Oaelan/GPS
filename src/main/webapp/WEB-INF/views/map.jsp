@@ -160,7 +160,7 @@
          	  },
          	  body: JSON.stringify({ // 요청 본문 설정
          	    Lat: latlng.getLat(),
-         	    Lon: latlng.getLng()
+         	    Lon: 30
          	  })
          	})
          	  .then(response => response.json())  // 응답을 JSON으로 변환
