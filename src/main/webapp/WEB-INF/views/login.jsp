@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Main</title>
-<link rel="stylesheet" href="../resources/CSS/main.css?ver=1">
+<title>로그인</title>
+<link rel="stylesheet" href="../resources/CSS/login.css?ver=1">
 </head>
 <body>
   <div class="container">
@@ -25,16 +25,26 @@
     	
     </div>
     <div class="content">
-    	<div class="text">
-    		위치찾기 서비스는 로그인 후 이용 가능합니다.
-    	</div>
     	<div class="login">
-    		<form action="/login">
-    			<input type="submit" value="로그인">
-    		</form>
-    		<form action="/sign">
-    			<input type="submit" value="회원가입">
-    		</form>
+    		<table>
+    			<tr>
+    				<td><input type="text" name="id" placeholder=" 아이디" class="id"></td>
+    			</tr>
+    		</table>
+    		<table>
+    			<tr>
+    				<td><input type="password" name="pw" placeholder=" 비밀번호" class="pw"></td>
+    			</tr>
+    		</table>
+    		<table>
+    			<tr>
+    				<td>
+    				<form action="">
+    				<input type="submit" class="loginBtn" value="로그인">
+    				</form>
+    				</td>
+    			</tr>
+    		</table>
     	</div>
     </div>
   </div>
