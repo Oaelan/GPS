@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MapFetchController {
 	
-	@Autowired
-	GPSInfoVO gvo;
-	
 	
 	// 위도 경도 저장 컨트롤러
     @PostMapping("/sendLatLon")
