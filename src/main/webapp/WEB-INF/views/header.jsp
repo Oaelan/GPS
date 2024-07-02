@@ -1,18 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>병원 소개</title>
-<link rel="stylesheet" href="../resources/CSS/main.css">
-<link rel="stylesheet" href="../resources/CSS/introduce.css">
-</head>
-<body>
-  <div class="container">
-  <jsp:include page="header.jsp"></jsp:include>
-    <!-- <div class="StateBar">
+
+	<div class="StateBar">
     	
     	<img src="../resources/IMG/wifi.png" class="wifi">
     	<img src="../resources/IMG/battery.png" class="battery">
@@ -23,16 +12,10 @@
     	<img src="../resources/IMG/menu_bar.png" class="menuBar" onclick="toggleMenu()">
     	<div class="title">Green Hospital
     	</div>
-    	<img src="../IMG/user2.png" class="user" onclick="openUserMenu()">
+    	<img src="../resources/IMG/user.png" class="user" onclick="openUserMenu()">
     	
-    </div> -->
-    <div class="content">
-    	<div class="text">
-    		<h2>안녕하세요 그린병원입니다.</h2>
-    	</div>
-    </div>
-  </div>
-<!--    <div id="slideMenu" class="slide-menu">
+	</div>
+	 <div id="slideMenu" class="slide-menu">
       <a href="#" class="closebtn" onclick="closeMenu()">&times;</a>
 		<ul>
 			<li><a href="/ComingRoute">오시는 길</a></li>
@@ -43,10 +26,8 @@
 	<div id="userMenu" class="user-menu">
     <a href="#" class="closebtn" onclick="closeUserMenu()">&times;</a>
     <ul>
-      <li><a href="/main">로그아웃</a></li>
+      <li><a href="/">로그아웃</a></li>
       <li><a href="/MyPage">마이페이지</a></li>
     </ul>
   </div>
-  <script src="../resources/JS/main.js"></script> -->
-</body>
-</html>
+  <script src="../resources/JS/main.js"></script>

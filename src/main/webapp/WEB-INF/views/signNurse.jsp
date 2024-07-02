@@ -9,8 +9,10 @@
 <link rel="stylesheet" href="../resources/CSS/signNurse.css?ver=1">
 </head>
 <body>
+
   <div class="container">
-    <div class="StateBar">
+  <jsp:include page="header.jsp"></jsp:include>
+   <!--  <div class="StateBar">
     	
     	<img src="../resources/IMG/wifi.png" class="wifi">
     	<img src="../resources/IMG/battery.png" class="battery">
@@ -23,7 +25,7 @@
     	</div>
     	<img src="../resources/IMG/user.png" class="user" onclick="openUserMenu()">
     	
-    </div>
+    </div> -->
     <div class="content">
     	<div class="sign">
     		<table>
@@ -51,13 +53,10 @@
     				<td>
     					 <select class="s_team" name="s_team">
 								<option value="" disabled selected>진료과</option>
-								<option>내과</option>
-								<option>외과</option>
-								<option>소아과</option>
-								<option>피부과</option>
-								<option>안과</option>
-								<option>치과</option>
-								<!-- 추가 진료과목들 -->
+								<option>진료1팀</option>
+								<option>진료2팀</option>
+								<option>진료3팀</option>
+								<option>수술팀</option>
 						</select>
 					</td>
     			</tr>
@@ -74,7 +73,7 @@
     	</div>
     </div>
   </div>
-   <div id="slideMenu" class="slide-menu">
+   <!-- <div id="slideMenu" class="slide-menu">
       <a href="#" class="closebtn" onclick="closeMenu()">&times;</a>
 		<ul>
 			<li><a href="ComingRoute">오시는 길</a></li>
@@ -89,6 +88,6 @@
       <li><a href="/sign">회원가입</a></li>
     </ul>
   </div>
-  <script src="../resources/JS/main.js"></script>
+  <script src="../resources/JS/main.js"></script> -->
 </body>
 </html>
