@@ -13,7 +13,7 @@
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="content">
 			<div class="add">
-				<form id="registrationForm" action="">
+				<form action="">
 					<table>
 						<tr>
 							<td><input type="text" name="p_no" placeholder="입원번호"

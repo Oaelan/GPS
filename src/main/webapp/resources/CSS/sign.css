@@ -193,11 +193,9 @@ body {
         justify-content: flex-start; /* 세로 정렬 */
         flex-direction: column;
     	width: 400px;
-    	height: 700px;
+    	height: 600px;
     	border-radius: 10px;
     	border: 1px solid lightgray;
-    	position: relative;
-    	top: 50px;
     }
     
       .id, .pw, .pwcheck, .name, .phone {
@@ -205,12 +203,16 @@ body {
 		height: 40px;
 		border-radius: 5px;
     	border: 1px solid lightgray;
-    	margin-top: 40px;
+    	margin-top: 20px;
     	padding-left: 5px;
     }
     
        .id, .pw, .pwcheck, .name, .phone:focus {
 		outline: none;
+    }
+    
+    .id {
+    	margin-top: 40px;
     }
     
        .signBtn {
@@ -220,7 +222,7 @@ body {
 		background-color: #4CAF50;
     	border: none;
     	color: white;
-    	margin-top: 80px;
+    	margin-top: 40px;
     }
     
     label {
