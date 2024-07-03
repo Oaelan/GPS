@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>간호사 회원가입</title>
-<link rel="stylesheet" href="../resources/CSS/signNurse.css?ver=7">
+<link rel="stylesheet" href="../resources/CSS/signNurse.css?ver=754">
 </head>
 <body>
 
