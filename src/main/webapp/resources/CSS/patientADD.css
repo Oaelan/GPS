@@ -227,4 +227,25 @@ body {
     	margin-top: 40px;
     	
     }
+    
+    label {
+    	font-size: 13px;
+    }
+    
+    .p_name, .p_phone, .p_subPhone, .p_room {
+    	margin-top: 20px;
+    }
+    
+    .p_name {
+    	margin-bottom: 30px;
+    }
+    
+    #gender > td {
+    	color: gray;
+    	font-size: 14px;
+    }
+    /* #gender > td: 첫 번째 td 요소에 대한 스타일 적용 */
+    #gender > td {
+        padding-right: 50px; /* 첫 번째 td 요소의 오른쪽 여백 */
+    }
 }
