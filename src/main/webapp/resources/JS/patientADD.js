@@ -49,7 +49,7 @@
 
     p_phoneLabel.textContent = ".";
     p_phoneLabel.style.color = "white";
-
+    
     p_phone.addEventListener("blur", () => {
         const phonePattern = /^01[016789]-\d{3,4}-\d{4}$/;
         if (phonePattern.test(p_phone.value)) {
