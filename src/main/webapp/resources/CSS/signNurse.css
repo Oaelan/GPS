@@ -184,7 +184,7 @@ body {
         justify-content: center;
         flex-direction: column;
         width: 100vw;
-        height: 800px;
+        height: 750px;
     }
     
     .sign {
@@ -193,11 +193,10 @@ body {
         justify-content: flex-start; /* 세로 정렬 */
         flex-direction: column;
     	width: 400px;
-    	height: 750px;
+    	height: 650px;
     	border-radius: 10px;
     	border: 1px solid lightgray;
     	position: relative;
-    	top: 50px;
     }
     
       .id, .pw, .name, .pwcheck, .phone, .s_team{
@@ -205,8 +204,12 @@ body {
 		height: 40px;
 		border-radius: 5px;
     	border: 1px solid lightgray;
-    	margin-top: 40px;
+    	margin-top: 20px;
     	color: gray;
+    }
+    
+    .id {
+    	margin-top: 40px;
     }
     
        .id, .pw, .pwcheck, .name, .phone {
