@@ -183,7 +183,7 @@
         $scale: false,
         center: new kakao.maps.LatLng(lat, lon),
         center: new kakao.maps.Coords(580, -550),
-        level: 1
+        level: 3
     });
     var center = map.getCenter();
     
