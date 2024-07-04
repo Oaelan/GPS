@@ -14,10 +14,7 @@
             if (navigator.geolocation) {
                 navigator.geolocation.watchPosition(
                 // 위치 가져오기 성공 시 콜백 함수
-                function(position) {
-                    
-                    
-                    
+                function(position) {                                                 
                     var lat = position.coords.latitude; // 위도
                     var lon = position.coords.longitude; // 경도
                     console.log('현재 위치:', lat, lon);
