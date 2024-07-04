@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>간호사 로그인</title>
 <link rel="stylesheet" href="../resources/CSS/main.css">
-<link rel="stylesheet" href="../resources/CSS/loginSuccessNurse.css">
+<link rel="stylesheet" href="../resources/CSS/loginSuccessNurse.css?ver=14532">
 <style type="text/css">
 .controls {
 	display: flex;
@@ -70,6 +70,7 @@
 	background-color: #4CAF50;
 	color: white;
 }
+
 </style>
 </head>
 <body>
@@ -101,7 +102,7 @@
 	 // 화면 로드 후 실행될 함수
     document.addEventListener('DOMContentLoaded', function() {
         fetchPatients(); // 환자 리스트 가져오기 함수 호출
-        initializePnameClick(); // 층 선택 후 담당 환자 위치 가져옴
+        //initializePnameClick(); // 층 선택 후 담당 환자 위치 가져옴
     });
 	
     var path = '../resources/IMG/';
@@ -119,46 +120,9 @@
     //타일 사이즈
     var tileSize = getTileSize();
     
-    // 셀렉트 박스에서 값을 선택 했을 때 선택되어 있는 환자 선택 해제 그리고 해당 층에 있는 모든 담당 환자 마커 표시 하게
-   function initializePnameClick(){
-    document.getElementById('floorSelect').addEventListener('change', () => {       
-        // 모든 환자 이름 요소에서 clicked 클래스 제거(선택한 환자 선택해제 하는거임)
-        document.querySelectorAll('.patient').forEach(p => {
-            p.classList.remove('clicked');
-       		 }); 
-        // 해당 층의 환자 위치 정보 들고오기
-       fetch('/nurse/getPatientGpsByFloor?z=' + currentFloor, {
-   			 headers: {
-       		 'Accept': 'application/json'
-    		}
-		})
-
-        .then(response => response.json())
-        .then(patientsByFloor => {
-            // 기존의 마커가 있으면 지도에서 제거
-            if (markerPgpsByFloor) {
-                markerPgpsByFloor.setMap(null);                
-            }
-
-            // 가져온 환자들의 위치에 마커를 표시
-            patientsByFloor.forEach(patient => {
-                var imageSrcForPByFloor = path + "redM.png"; // 환자 마커 이미지 주소
-                var imageSizeForPByFloor = new kakao.maps.Size(64, 69); // 마커 이미지 크기
-                var imageOptionForPByFloor = { offset: new kakao.maps.Point(27, 69) }; // 마커 이미지 옵션
-                var markerImageForPByFloor = new kakao.maps.MarkerImage(imageSrcForPByFloor, imageSizeForPByFloor, imageOptionForPByFloor); 
-
-                markerPgpsByFloor = new kakao.maps.Marker({
-                    position: new kakao.maps.LatLng(patient.x, patient.y), // 환자 위치 좌표
-                    map: map,
-                    image: markerImageForPByFloor
-                });
-            });
-        })
-        .catch(error => console.error('Error fetching patients by floor:', error));
-        
-        
-	})};
-
+ 	// 현재 열린 인포윈도우를 저장할 변수
+    var currentInfowindow = null;
+    
     // 각 층의 이미지를 반환하는 함수
     function getTileImage(x, y) {
         var imageMap = {
@@ -221,15 +185,19 @@
         level: 1
     });
     var center = map.getCenter();
-    var marker = new kakao.maps.Marker({
+    
+  	/*   var marker = new kakao.maps.Marker({
         position: new kakao.maps.Coords(400, -1000),
-    });
-     
+    }); */    
+    // 간호사 위치 마커가 될 마커
+    /*   marker.setMap(map); */
+    
+    
+    
     // 지도 드래그 비활성화
     map.setDraggable(false); 
 
-    // 지도에 마커 표시하는거
-    marker.setMap(map);
+ 
 
    
 
@@ -291,7 +259,7 @@
 
                         // 기존의 마커가 있으면 지도에서 제거합니다
                         if (markerPgps) {
-                            markerPgps.setMap(null);                         
+                            markerPgps.setMap(null);                           
                         }
 						console.log(P_GPS.x, P_GPS.y)
                         // 새로운 마커를 생성합니다
@@ -308,7 +276,31 @@
                         
                         markerPgps.setMap(map);
                         
-                    })
+                        // 환자에 대한 정보 표시 박스
+                        var iwContent = '<div style="padding:5px; width:200px; height:120px;">' +
+                        '<div style="font-size:14px; margin-bottom:10px;">이름: ' + P_GPS.p_name + '</div>' +
+                        '<div style="font-size:14px; margin-bottom:10px;">병실: ' + P_GPS.p_room + '</div>' +
+                        '<div style="font-size:14px; margin-bottom:10px;">전화번호: ' + P_GPS.p_phone + '</div>' +
+                        '<div style="font-size:14px;">보호자: ' + P_GPS.p_subPhone + '</div>' +
+                        '</div>';
+                        iwPosition = new kakao.maps.LatLng(P_GPS.x, P_GPS.y); //인포윈도우 표시 위치입니다
+
+                    	 // 기존 인포윈도우가 있으면 닫습니다
+                        if (currentInfowindow) {
+                            currentInfowindow.close();
+                        }
+                        
+	                    // 인포윈도우를 생성합니다
+	                    currentInfowindow = new kakao.maps.InfoWindow({
+	                        position : iwPosition, 
+	                        content : iwContent 
+	                    });
+	                 
+	                    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+	                    currentInfowindow.open(map, markerPgps); 
+	                    
+                                                                  
+                   })
                     .catch(error => console.error('Error fetching patient details:', error));
                 });
             });
