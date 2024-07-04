@@ -166,7 +166,7 @@
     var plan = function(x, y, z) {
         y = -y - 1; // y 좌표 변환
         // z 레벨 1일 때 타일 범위 제한 (0,0)
-        // 커스텀 타일 이미지가 나오는 좌표 (좌표 갯수만큼 이미지가 나옴)
+        // 커스텀 타일 이미지가 나오는 좌표 ()
         if (z === 1 && x == 0 && y == 0) {
             return getTileImage(x, y);
         } else {
@@ -183,7 +183,7 @@
         $scale: false,
         center: new kakao.maps.LatLng(lat, lon),
         center: new kakao.maps.Coords(580, -550),
-        level: 3
+        level: 1
     });
     var center = map.getCenter();
     
