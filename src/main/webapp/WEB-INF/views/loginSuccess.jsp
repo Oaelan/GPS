@@ -52,6 +52,7 @@
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="content">
 			<div class="dropdown">
+			
 				<select id="floorSelect" onchange="selectFloor()">
 					<option value="1" class="floor">1층</option>
 					<option value="2" class="floor">2층</option>
@@ -59,21 +60,24 @@
 					<option value="4" class="floor">4층</option>
 				</select>
 			</div>
-			<div class="map">
+			<div class="map" style = "height: 50vh">
 				<div id="outShell">
 					<div id="mapshell">
 						<div id="map"></div>
 					</div>
 				</div>
 			</div>
+			
 			<div class="controls">
-				<input type="button" value="↑" onclick="moveMap('up')"> <input type="button" value="↓" onclick="moveMap('down')"> <input type="button" value="←" onclick="moveMap('left')"> <input type="button" value="→" onclick="moveMap('right')">
+				<div id = "result"></div><br>
+				<div id = "result2"></div><br>
+<!-- 				<input type="button" value="↑" onclick="moveMap('up')"> <input type="button" value="↓" onclick="moveMap('down')"> <input type="button" value="←" onclick="moveMap('left')"> <input type="button" value="→" onclick="moveMap('right')"> -->
 			</div>
 		</div>
 	</div>
 	<div id="clickLatlng"></div>
 	<script src="../resources/JS/main.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f468622924673dc01ef6bebbdeacc4a2"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aad12cad349dd8370f9aeb3fc04a6f17"></script>
 	<script>
     var path = '../resources/IMG/';
     var currentFloor = "1";
@@ -81,6 +85,11 @@
     // 현재 위치의 위도와 경도를 담는 변수
     var lat;
     var lon;
+    var options = {
+    		enableHighAccuracy: true,
+    		timeout: 5000,
+    		maximumAge:0
+    };
 
     // 각 층의 이미지를 반환하는 함수
     function getTileImage(x, y) {
@@ -149,26 +158,60 @@
  
     
     // 동적으로 결정된 타일 크기를 사용하여 커스텀 타일셋 정의
-    kakao.maps.Tileset.add('PLAN', new kakao.maps.Tileset(tileSize, tileSize, plan, '', false, 1, 1));
+//     kakao.maps.Tileset.add('PLAN', new kakao.maps.Tileset(tileSize, tileSize, plan, '', false, 1, 1));
     var node = document.getElementById('map');
+    
     var map = new kakao.maps.Map(node, {
-        projectionId: null,
-        mapTypeId: kakao.maps.MapTypeId.PLAN,
+//         projectionId: null,
+//         mapTypeId: kakao.maps.MapTypeId.PLAN,
         $scale: false,
-        center: new kakao.maps.LatLng(lat,lon),     
-        center: new kakao.maps.Coords(580, -550),
-        level: 1
+        center: new kakao.maps.LatLng(35.5421556,129.3382397),     
+//         center: new kakao.maps.Coords(580, -550),
+        level: 5
     });
     var center = map.getCenter();
+    
     var marker = new kakao.maps.Marker({
-      position:  new kakao.maps.Coords(400, -1000),
-    	
+        map: map,
+        position: map.getCenter()
     });
+    
+    function success(position){
+    	lat = position.coords.latitude,		// 위도 
+    	lon = position.coords.longitude; 	// 경도
+    	
+    	// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
+    	var locPosition = new kakao.maps.LatLng(lat, lon)
+        marker.setPosition(locPosition);
+    	var resultDiv = document.getElementById('result'); 
+        resultDiv.innerHTML = "위도: "+ lat+"<br>";
+        resultDiv.innerHTML += "경도: " +lon;
+    }    
+    
+
+    	if (navigator.geolocation) {
+            id = navigator.geolocation.watchPosition(success);
+            
+        } else {
+            var locPosition = new kakao.maps.LatLng(lat,lon);
+            map.setCenter(locPosition);
+            marker.setPosition(locPosition);
+        }
+
+    
+    
+    
     
  	// 클릭 이벤트 핸들러 추가
     kakao.maps.event.addListener(map, 'click', function(mouseEvent) { 
         // 클릭한 위도, 경도 정보를 가져옵니다 
         var latlng = mouseEvent.latLng; 
+        
+        navigator.geolocation.clearWatch(id);
+        
+        var resultDiv = document.getElementById('result2'); 
+        resultDiv.innerHTML = "r위도: "+ lat+"<br>";
+        resultDiv.innerHTML += "r경도: " +lon;
         
         // 기존의 마커가 있으면 지도에서 제거합니다
         if (markerFind) {
@@ -190,11 +233,11 @@
         var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
         message += '경도는 ' + latlng.getLng() + ' 입니다';
         
-        console.log(message)       
+       
     }); 
        
     
-    // 지도 이동 함수
+     // 지도 이동 함수
     function moveMap(direction) {
         var latlng = marker.getPosition();
         var moveLatLon;
@@ -218,7 +261,7 @@
     
     
     // 지도 드래그 비활성화
-    map.setDraggable(false); 
+/*     map.setDraggable(false);  */
   
 	// 지도에 마커 표시하는거 	
     marker.setMap(map);
