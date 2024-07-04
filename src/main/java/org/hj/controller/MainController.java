@@ -121,7 +121,13 @@ public class MainController {
 	
 	
 	
-	
+	// 입원 환자 등록 페이지
+		@GetMapping("/1234")
+		public String aaa() {
+			System.out.println("입원 환자 등록 페이지");
+			return "NewFile";
+		}
+		
 	
 	
 	

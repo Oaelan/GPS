@@ -14,7 +14,7 @@
 		where s_id = #{id}
 	</select>
 
-	
+		
 	<!-- 환자 위치 가져오기 -->
 	<select id="getPatientGps" resultType="org.hj.model.PatientGPSVO" parameterType="org.hj.model.PatientGPSVO">
 		select *

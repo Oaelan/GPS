@@ -158,18 +158,19 @@
         var screenWidth = window.innerWidth ||
                           document.documentElement.clientWidth ||
                           document.body.clientWidth;
-        return (screenWidth > 768) ? 600 : 580; // 필요한 경우 조정
+        return (screenWidth > 768) ? 1024 : 600; // 필요한 경우 조정
     }
      
 
     // 타일 이미지 반환 함수
     var plan = function(x, y, z) {
         y = -y - 1; // y 좌표 변환
-        // z 레벨 1일 때 타일 범위 제한 (0,0), (1,0), (0,1), (1,1)
-        if (z === 1 && x >= 0 && x <= 1 && y >= 0 && y <= 1) {
+        // z 레벨 1일 때 타일 범위 제한 (0,0)
+        // 커스텀 타일 이미지가 나오는 좌표 (좌표 갯수만큼 이미지가 나옴)
+        if (z === 1 && x == 0 && y == 0) {
             return getTileImage(x, y);
         } else {
-            return path + '4.png';
+            return path + 'white.png';
         }
     };
     
@@ -195,7 +196,7 @@
     
     
     // 지도 드래그 비활성화
-    map.setDraggable(false); 
+    map.setDraggable(true); 
 
  
 
@@ -297,7 +298,7 @@
 	                    });
 	                 
 	                    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-	                    currentInfowindow.open(map, markerPgps); 
+	                    currentInfowindow.open(map,markerPgps); 
 	                    
                                                                   
                    })
