@@ -116,6 +116,9 @@
     var markerFind = null;
     var markerPgpsByFloor = null;
     
+    //타일 사이즈
+    var tileSize = getTileSize();
+    
     // 셀렉트 박스에서 값을 선택 했을 때 선택되어 있는 환자 선택 해제 그리고 해당 층에 있는 모든 담당 환자 마커 표시 하게
    function initializePnameClick(){
     document.getElementById('floorSelect').addEventListener('change', () => {       
@@ -123,7 +126,7 @@
         document.querySelectorAll('.patient').forEach(p => {
             p.classList.remove('clicked');
        		 }); 
-        // 해당 층의 환자 위치 정보 들어 오기
+        // 해당 층의 환자 위치 정보 들고오기
        fetch('/nurse/getPatientGpsByFloor?z=' + currentFloor, {
    			 headers: {
        		 'Accept': 'application/json'
@@ -134,10 +137,7 @@
         .then(patientsByFloor => {
             // 기존의 마커가 있으면 지도에서 제거
             if (markerPgpsByFloor) {
-                markerPgpsByFloor.setMap(null);
-                if(markerPgps){
-                    markerPgps.setMap(null);
-                }
+                markerPgpsByFloor.setMap(null);                
             }
 
             // 가져온 환자들의 위치에 마커를 표시
@@ -196,7 +196,7 @@
                           document.body.clientWidth;
         return (screenWidth > 768) ? 600 : 580; // 필요한 경우 조정
     }
-    var tileSize = getTileSize();
+     
 
     // 타일 이미지 반환 함수
     var plan = function(x, y, z) {
@@ -224,35 +224,7 @@
     var marker = new kakao.maps.Marker({
         position: new kakao.maps.Coords(400, -1000),
     });
-    
-     // 클릭 이벤트 핸들러 추가
-    kakao.maps.event.addListener(map, 'click', function(mouseEvent) { 
-        // 클릭한 위도, 경도 정보를 가져옵니다 
-        var latlng = mouseEvent.latLng; 
-        
-        // 기존의 마커가 있으면 지도에서 제거합니다
-        if (markerFind) {
-            markerFind.setMap(null);
-        }
-        
-        // 새로운 마커를 생성합니다
-        var imageSrc = path + "greenM.png"; // 마커이미지의 주소입니다    
-        var imageSize = new kakao.maps.Size(64, 69); // 마커이미지의 크기입니다
-        var imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-        
-        markerFind = new kakao.maps.Marker({
-            position: latlng,
-            map: map,
-            image: markerImage
-        });
-        
-        var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-        message += '경도는 ' + latlng.getLng() + ' 입니다';
-        
-        console.log(message)       
-    });  
-    
+     
     // 지도 드래그 비활성화
     map.setDraggable(false); 
 
@@ -319,10 +291,7 @@
 
                         // 기존의 마커가 있으면 지도에서 제거합니다
                         if (markerPgps) {
-                            markerPgps.setMap(null);
-                            if(markerPgpsByFloor){
-                                markerPgpsByFloor.setMap(null);
-                            }
+                            markerPgps.setMap(null);                         
                         }
 						console.log(P_GPS.x, P_GPS.y)
                         // 새로운 마커를 생성합니다
