@@ -7,6 +7,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>입원 환자 등록</title>
 <link rel="stylesheet" href="../resources/CSS/patientADD.css?ver=17">
+<link rel="stylesheet" href="../resources/CSS/web.css">
+<style type="text/css">
+	.content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		width: 100vw;
+		height: 800px;
+	}
+	.add {
+		display: flex;
+		align-items: center; /* 가로 정렬 */
+		justify-content: flex-start; /* 세로 정렬 */
+		flex-direction: column;
+		width: 400px;
+		height: 900px;
+		border-radius: 10px;
+		border: 1px solid lightgray;
+		position: relative;
+		top: 50px;
+	}
+	.p_no, .p_name, .p_gender, .p_id, .p_phone, .p_subPhone, .p_room, .s_id
+		{
+		width: 300px;
+		height: 40px;
+		border-radius: 5px;
+		border: 1px solid lightgray;
+		margin-top: 40px;
+		color: gray;
+	}
+	.p_no, .p_name, .p_gender, .p_id, .p_phone, .p_subPhone, .p_room, .s_id
+		{
+		padding-left: 5px;
+	}
+	.p_no, .p_name, .p_gender, .p_id, .p_phone, .p_subPhone, .p_room, .s_id:focus
+		{
+		outline: none;
+	}
+	.addBtn {
+		width: 300px;
+		height: 40px;
+		border-radius: 5px;
+		background-color: #4CAF50;
+		border: none;
+		color: white;
+		margin-top: 40px;
+	}
+	label {
+		font-size: 13px;
+	}
+	.p_name, .p_phone, .p_subPhone, .p_room {
+		margin-top: 20px;
+	}
+	.p_name {
+		margin-bottom: 30px;
+	}
+	#gender>td {
+		color: gray;
+		font-size: 14px;
+	}
+	/* #gender > td: 첫 번째 td 요소에 대한 스타일 적용 */
+	#gender>td {
+		padding-right: 50px; /* 첫 번째 td 요소의 오른쪽 여백 */
+	}
+</style>
 </head>
 <body>
 	<div class="container">

@@ -7,6 +7,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입</title>
 <link rel="stylesheet" href="../resources/CSS/sign.css?ver=4">
+<link rel="stylesheet" href="../resources/CSS/web.css">
+<style type="text/css">
+	.content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		width: 100vw;
+		height: 800px;
+	}
+	.sign {
+		display: flex;
+		align-items: center; /* 가로 정렬 */
+		justify-content: flex-start; /* 세로 정렬 */
+		flex-direction: column;
+		width: 400px;
+		height: 600px;
+		border-radius: 10px;
+		border: 1px solid lightgray;
+	}
+	.id, .pw, .pwcheck, .name, .phone {
+		width: 300px;
+		height: 40px;
+		border-radius: 5px;
+		border: 1px solid lightgray;
+		margin-top: 20px;
+		padding-left: 5px;
+	}
+	.id, .pw, .pwcheck, .name, .phone:focus {
+		outline: none;
+	}
+	.id {
+		margin-top: 40px;
+	}
+	.signBtn {
+		width: 300px;
+		height: 40px;
+		border-radius: 5px;
+		background-color: #4CAF50;
+		border: none;
+		color: white;
+		margin-top: 40px;
+	}
+	label {
+		font-size: 10px;
+	}
+</style>
 </head>
 <body>
   <div class="container">

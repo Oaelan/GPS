@@ -8,21 +8,83 @@
 <title>병원 내 길찾기</title>
 <link rel="stylesheet" href="../resources/CSS/main.css">
 <link rel="stylesheet" href="../resources/CSS/FindRoute.css">
+<link rel="stylesheet" href="../resources/CSS/web.css">
+<style type="text/css">
+	/* 드롭다운 컨테이너 */
+	.dropdown {
+		position: relative;
+		display: inline-block;
+		font-family: 나눔고딕;
+	}
+
+	/* 드롭다운 버튼 */
+	.dropbtn {
+		background-color: #4CAF50;
+		color: white;
+		width: 200px;
+		height: 40px;
+		font-size: 16px;
+		border: none;
+		cursor: pointer;
+		font-family: 나눔고딕;
+	}
+
+	/* 드롭다운 내용 (숨김 상태) */
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: #f9f9f9;
+		min-width: 160px;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		z-index: 1;
+	}
+
+	/* 드롭다운 링크 스타일 */
+	.dropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+	}
+
+	/* 드롭다운 링크에 마우스를 올렸을 때 */
+	.dropdown-content a:hover {
+		background-color: #f1f1f1;
+	}
+
+	/* 드롭다운 버튼에 마우스를 올렸을 때 드롭다운 내용 보이기 */
+	.dropdown:hover .dropdown-content {
+		display: block;
+	}
+
+	/* 드롭다운 버튼에 마우스를 올렸을 때 버튼 스타일 변경 */
+	.dropdown:hover .dropbtn {
+		background-color: #3e8e41;
+	}
+		.content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		width: 100%;
+		height: 700px;
+	}
+	.map {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid lightgray;
+		width: 300px;
+		height: 300px;
+		position: relative;
+		top: 50px;
+		text-align: center;
+	}
+</style>
 </head>
 <body>
   <div class="container">
   <jsp:include page="header.jsp"></jsp:include>
-   <!--  <div class="StateBar">
-    	<img src="../resources/IMG/wifi.png" class="wifi">
-    	<img src="../resources/IMG/battery.png" class="battery">
-    	<div class="time">12:00</div>
-    	
-    </div>
-    <div class="Menu">
-    	<img src="../resources/IMG/menu_bar.png" class="menuBar" onclick="toggleMenu()">
-    	<div class="title">Green Hospital</div>
-    	<img src="../resources/IMG/user2.png" class="user" onclick="openUserMenu()">
-    </div> -->
     <div class="content">
 			<div class="dropdown">
 				<button class="dropbtn" id="dropbtn">층별 안내</button>
@@ -38,21 +100,5 @@
     	</div>
     </div>
   </div>
-<!--    <div id="slideMenu" class="slide-menu">
-      <a href="#" class="closebtn" onclick="closeMenu()">&times;</a>
-		<ul>
-			<li><a href="/ComingRoute">오시는 길</a></li>
-			<li><a href="/FindRoute">병원 내 길찾기</a></li>
-			<li><a href="/introduce">병원소개</a></li>
-		</ul>
-	</div>
-	<div id="userMenu" class="user-menu">
-    <a href="#" class="closebtn" onclick="closeUserMenu()">&times;</a>
-    <ul>
-      <li><a href="/main">로그아웃</a></li>
-      <li><a href="/MyPage">마이페이지</a></li>
-    </ul>
-  </div>
-  <script src="../resources/JS/main.js"></script> -->
 </body>
 </html>
