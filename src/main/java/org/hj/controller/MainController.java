@@ -72,6 +72,8 @@ public class MainController {
 				}
 				
 				else if (s_team.equals("master"))  {
+					model.addAttribute("loginedType",((ls.login(uvo)).getS_team()));
+					System.out.println(session.getAttribute("s_team"));
 					return "loginSuccessNurse";
 				}
 				

@@ -103,11 +103,7 @@
     var watchId;
   	// 선택한 셀렉트 박스 안의 층수
     var currentFloor = "1";
-    
-    // 현재 위치의 위도와 경도를 담는 변수
-    var lat;
-    var lon;
-
+    	
     // 환자 위치 마커
     var markerPgps = null;
   	//간호사 위치 마커

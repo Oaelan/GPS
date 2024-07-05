@@ -26,12 +26,12 @@
 			
 			<c:if test="${loginedType != null}">
 				<li ><a href="/ComingRoute">담당 환자 찾기</a></li>
-				<li><a href="/FindRoute">병원 내 길찾기</a></li>
-				<c:if test="${loginedType == 'master'}">
-				<li><a href="/introduce">의료진 가입 요청</a></li>
-				</c:if>
+				<li><a href="/FindRoute">병원 내 길찾기</a></li>							
+			</c:if>
 				
-			</c:if>	
+			<c:if test="${loginedType.equals('master')}">
+				<li><a href="/introduce">의료진 가입 요청</a></li>
+			</c:if>
 			
 					
 		</ul>
