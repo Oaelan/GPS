@@ -46,7 +46,6 @@
 	display: flex;
 }
 
-
 #moveBtn {
 	display: flex;
 	justify-content: center;
@@ -81,9 +80,7 @@
 	<div class="container">
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="content">
-			<div id = "moveBtn">
-			</div>
-			
+			<div id="moveBtn"></div>
 			<div class="map">
 				<div id="outShell">
 					<div id="mapshell">
@@ -91,11 +88,12 @@
 					</div>
 				</div>
 			</div>
-			
 			<div class="controls">
-				<div id = "result"></div><br>
-				<div id = "result2"></div><br>
-<!-- 				<input type="button" value="↑" onclick="moveMap('up')"> <input type="button" value="↓" onclick="moveMap('down')"> <input type="button" value="←" onclick="moveMap('left')"> <input type="button" value="→" onclick="moveMap('right')"> -->
+				<div id="result"></div>
+				<br>
+				<div id="result2"></div>
+				<br>
+				<!-- 				<input type="button" value="↑" onclick="moveMap('up')"> <input type="button" value="↓" onclick="moveMap('down')"> <input type="button" value="←" onclick="moveMap('left')"> <input type="button" value="→" onclick="moveMap('right')"> -->
 			</div>
 		</div>
 	</div>
@@ -108,7 +106,7 @@
     var lat;
     var lon;
     var MainmarkerPosition;
-//     var newCenter;  
+//  var newCenter;  
     var options = {
     		enableHighAccuracy: true,
     		timeout: 2000,
@@ -138,11 +136,11 @@
 		Mainmarker.setPosition(locPosition);
 	}
     
-    
     function success(position) {
     	
 		var lat = position.coords.latitude; // 위도 
 		var lon = position.coords.longitude; // 경도
+		
 		
 		var data = {
                 x: lat,
@@ -164,7 +162,7 @@
 	    })
 	    .then(data => {
 	        console.log('Success:', data);
-
+	        
 	        // 서버에서 위치 데이터 받아오기
 	        fetch('/u_position')
 	        .then(response => {
@@ -199,19 +197,19 @@
 	        console.error('Error:', error);
 	    });
 		
-		options;
-		
-		// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
+			options;
+			
+		// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성		
 		var resultDiv = document.getElementById('result');
 		resultDiv.innerHTML = "위도: " + lat + "<br>";
 		resultDiv.innerHTML += "경도: " + lon;
-	}
-
+	}	
 	
-	
-	
-	
-	
+    
+    
+    
+    
+    
 	function panTo(lat, lon) {
 	    // 이동할 위도 경도 위치를 생성합니다 
 	    var moveLatLon = new kakao.maps.LatLng(lat, lon);
@@ -221,7 +219,7 @@
 	    map.panTo(moveLatLon);            
 	} 
 		
-	
+		
 	
 		// 장소 위치 지정
 		var positions = [
@@ -298,10 +296,9 @@
 		
 		
 		
-
 		
 
-	</script>
 	
+		</script>
 </body>
 </html>
