@@ -14,6 +14,24 @@
 		where s_id = #{id}
 	</select>
 
+		
+	<!-- 환자 위치 가져오기 -->
+	<select id="getPatientGps" resultType="org.hj.model.PatientGPSVO" parameterType="org.hj.model.PatientGPSVO">
+		select *
+		from patient_GPS
+		where p_no = #{p_no}
+	</select>
 
+
+	<!-- 층수를 받아와서 해당 층에 있는 환자들 위치 가져오기 -->
+	<!-- parameterType을 따로 설정하지 않고 그냥 변수이름 바로 넣었음, -->
+	<select id="getPatientGpsByFloor" parameterType="map" resultType="org.hj.model.PatientGPSVO">
+		SELECT p.p_no, p.p_name, p.p_gender, p.p_phone,
+		p.p_room, gps.x, gps.y, gps.z
+		FROM patient p
+		JOIN patient_GPS gps ON p.p_no = gps.p_no
+		WHERE p.s_id = #{userId}
+		AND gps.z = #{z}
+	</select>
 
 </mapper>

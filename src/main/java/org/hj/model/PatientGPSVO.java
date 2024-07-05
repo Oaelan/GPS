@@ -7,13 +7,12 @@ public class PatientGPSVO {
 	private String p_gender;
 	private String p_phone;
 	private String p_subPhone;
+	private String p_room;
+	private double x;
+	private double y;
+	private  int z;
+		
 	
-	
-	@Override
-	public String toString() {
-		return "PatientGPSVO [p_no=" + p_no + ", p_name=" + p_name + ", p_gender=" + p_gender + ", p_phone=" + p_phone
-				+ ", p_subPhone=" + p_subPhone + ", p_room=" + p_room + ", x=" + x + ", y=" + y + "]";
-	}
 	public final String getP_no() {
 		return p_no;
 	}
@@ -62,8 +61,21 @@ public class PatientGPSVO {
 	public final void setY(double y) {
 		this.y = y;
 	}
-	private String p_room;
-	private double x;
-	private double y;	
 	
+	public final int getZ() {
+		return z;
+	}
+	public final void setZ(int z) {
+		this.z = z;
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "PatientGPSVO [p_no=" + p_no + ", p_name=" + p_name
+				+ ", p_gender=" + p_gender + ", p_phone=" + p_phone
+				+ ", p_subPhone=" + p_subPhone + ", p_room=" + p_room + ", x="
+				+ x + ", y=" + y + ", z=" + z + "]";
+	}
 }

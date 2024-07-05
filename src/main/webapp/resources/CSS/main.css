@@ -111,6 +111,10 @@ body {
   cursor: pointer;
 }
 
+.StateBar{
+	width: 90%;
+	display: none;
+}
 
 /* 모바일 장치용 스타일 */
 @media (max-width: 600px) {

@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-	<div class="StateBar">
-    	
+	<div class="StateBar">   	
     	<img src="../resources/IMG/wifi.png" class="wifi">
     	<img src="../resources/IMG/battery.png" class="battery">
-    	<div class="time">12:00</div>
-    	
+    	<div class="time">12:00</div>  	
     </div>
+    
     <div class="Menu">
     	<img src="../resources/IMG/menu_bar.png" class="menuBar" onclick="toggleMenu()">
     	<div class="title">Green Hospital
