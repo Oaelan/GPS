@@ -153,19 +153,30 @@
            
            
           
-           fetch('/sendLatLon', {
-         	  method: 'POST', // HTTP 요청 메소드
-         	  headers: {
-         	    'Content-Type': 'application/json'  // 요청 헤더 설정
-         	  },
-         	  body: JSON.stringify({ // 요청 본문 설정
-         	    Lat: latlng.getLat(),
-         	    Lon: 30
-         	  })
-         	})
-         	  .then(response => response.json())  // 응답을 JSON으로 변환
-         	  .then(data => console.log(data))    // 변환된 데이터를 콘솔에 출력
-         	  .catch(error => console.error('Error:', error));  // 오류 처리 
+           async function sendCoordinates(userId, lat, lon) {
+               try {
+                   const response = await fetch('/api/sendLatLon', {
+                       method: 'POST', // HTTP 요청 메소드
+                       headers: {
+                           'Content-Type': 'application/json'  // 요청 헤더 설정
+                       },
+                       body: JSON.stringify({ // 요청 본문 설정
+                           userId: userId,
+                           latitude: lat,
+                           longitude: lon
+                       })
+                   });
+                   const data = await response.json();  // 응답을 JSON으로 변환
+                   console.log(data);  // 변환된 데이터를 콘솔에 출력
+               } catch (error) {
+                   console.error('Error:', error);  // 오류 처리
+               }
+           }
+
+           document.addEventListener('DOMContentLoaded', () => {
+               // Example usage
+               sendCoordinates("${userId}", latlng.getLat(), latlng.getLng());  // Example user ID and coordinates
+           });
       }
     </script>
     
