@@ -8,15 +8,18 @@
 <mapper namespace="org.hj.mapper.NurseMapper">
 
 	<!-- 환자 리스트 가져옴 -->
-	<select id="getPList" resultType="org.hj.model.PatientVO" parameterType="org.hj.model.UserVO">
+	<select id="getPList" resultType="org.hj.model.PatientVO"
+		parameterType="org.hj.model.UserVO">
 		select p_no,p_name
 		from patient
 		where s_id = #{id}
 	</select>
 
-		
+
 	<!-- 환자 위치 가져오기 -->
-	<select id="getPatientGps" resultType="org.hj.model.PatientGPSVO" parameterType="org.hj.model.PatientGPSVO">
+	<select id="getPatientGps"
+		resultType="org.hj.model.PatientGPSVO"
+		parameterType="org.hj.model.PatientGPSVO">
 		select *
 		from patient_GPS
 		where p_no = #{p_no}
@@ -25,13 +28,36 @@
 
 	<!-- 층수를 받아와서 해당 층에 있는 환자들 위치 가져오기 -->
 	<!-- parameterType을 따로 설정하지 않고 그냥 변수이름 바로 넣었음, -->
-	<select id="getPatientGpsByFloor" parameterType="map" resultType="org.hj.model.PatientGPSVO">
+	<select id="getPatientGpsByFloor" parameterType="map"
+		resultType="org.hj.model.PatientGPSVO">
 		SELECT p.p_no, p.p_name, p.p_gender, p.p_phone,
-		p.p_room, gps.x, gps.y, gps.z
+		p.p_room,
+		gps.x, gps.y, gps.z
 		FROM patient p
-		JOIN patient_GPS gps ON p.p_no = gps.p_no
+		JOIN patient_GPS gps ON p.p_no =
+		gps.p_no
 		WHERE p.s_id = #{userId}
 		AND gps.z = #{z}
 	</select>
+
+
+	<!-- mode=IN은 MyBatis에서 파라미터의 전달 방향을 지정 -->
+	<!-- 일단 예시로 watchposition 사용해서 위도 경도 값 받아와지는지 테스트 -->
+	<insert id="callInsertEx" statementType="CALLABLE" parameterType="org.hj.model.GPSInfoVO">
+		CALL insert_ex(#{x, mode=IN}, #{y,
+		mode=IN}, #{id, mode=IN})
+	</insert>
+	
+	
+	<!-- 환자 위치 가져오기 -->
+	<select id="getGps"
+		resultType="org.hj.model.GPSInfoVO"
+		parameterType="org.hj.model.GPSInfoVO">
+		select *
+		from ex
+		where id = #{id}
+	</select>
+	
+
 
 </mapper>

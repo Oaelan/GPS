@@ -134,7 +134,9 @@
     // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
     var map = new kakao.maps.Map(node,mapOption)      
     var center = map.getCenter();
-      
+    
+ 	// 새로운 중심 좌표 설정 현재 내위치가 움직일 때 지도도 따라 움직이게 
+    var newCenter  
     // 지도 드래그 비활성화
     map.setDraggable(true); 
 
@@ -159,66 +161,100 @@
             // watchPosition을 사용하여 위치 1초마다 감시
             var options = {
                 enableHighAccuracy: true, // 정확도 최대화
-                timeout: 1000, // 타임아웃 설정 (5초)
+                timeout: 6000, // 타임아웃 설정 (5초)
                 maximumAge: 0 // 최대 위치 데이터 나이 (0: 항상 최신 위치 사용)
             };
-            
-            watchId = navigator.geolocation.watchPosition(
-            // 위치 가져오기 성공 시 콜백 함수
-            function(position) {                                                 
-                var lat = position.coords.latitude; // 위도
-                var lon = position.coords.longitude; // 경도
-                                    
+
+            // watchPosition을 통해 위치를 지속적으로 감시
+            var watchId = navigator.geolocation.watchPosition(
+                // 위치 가져오기 성공 시 콜백 함수
+                function(position) {
+                    var lat = position.coords.latitude; // 위도
+                    var lon = position.coords.longitude; // 경도
+                    var markerPosition;
+
                     console.log('현재 위치:', lat, lon);
                     document.getElementById("position").innerHTML = "위도: " + lat + "<br> 경도: " + lon;
-                    var markerPosition = new kakao.maps.LatLng(lat, lon);
-                    
-                    if (!marker) {
-                        marker = new kakao.maps.Marker({
-                            position: markerPosition
+
+                    var data = {
+                        x: lat,
+                        y: lon
+                    };
+
+                    // 서버로 위치 데이터 전송
+                    fetch('/nurse/ex1234', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }                     
+                    })
+                    .then(data => {
+                        console.log('Success:', data);
+
+                        // 서버에서 위치 데이터 받아오기
+                        fetch('/nurse/position')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Data received:', data);
+                            
+                            // 카카오 맵 마커 위치 설정
+                            markerPosition = new kakao.maps.LatLng(data.x, data.y);
+                            newCenter = new kakao.maps.LatLng(data.x, data.y);
+                            map.setCenter(newCenter);
+
+                            if (!marker) {
+                                marker = new kakao.maps.Marker({
+                                    position: markerPosition
+                                });
+                                marker.setMap(map);
+                            } else {
+                                marker.setPosition(markerPosition);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
                         });
-                        marker.setMap(map);
-                    } else {
-                        marker.setPosition(markerPosition);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                },
+                // 위치 가져오기 실패 시 콜백 함수
+                function(error) {
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            console.error("사용자가 위치 공유를 거부했습니다.");
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            console.error("위치 정보를 사용할 수 없습니다.");
+                            break;
+                        case error.TIMEOUT:
+                            console.error("위치 정보를 가져오는 데 시간이 초과되었습니다.");
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            console.error("알 수 없는 오류가 발생했습니다.");
+                            break;
                     }
-                    
-                    stopWatching();
-                
-            },
-            // 위치 가져오기 실패 시 콜백 함수
-            function(error) {
-                switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    console.error("사용자가 위치 공유를 거부했습니다.");
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    console.error("위치 정보를 사용할 수 없습니다.");
-                    break;
-                case error.TIMEOUT:
-                    console.error("위치 정보를 가져오는 데 시간이 초과되었습니다.");
-                    break;
-                case error.UNKNOWN_ERROR:
-                    console.error("알 수 없는 오류가 발생했습니다.");
-                    break;
-                }
+                },
                 options // 옵션 객체 전달
-            });
+            );
         } else {
             console.error("Geolocation이 지원되지 않습니다.");
         }
     }
-   
 
- 
- // 위치 감시를 중지하는 함수
-    function stopWatching() {
-        if (watchId) {
-            navigator.geolocation.clearWatch(watchId);
-            watchId = null;
-            console.log("위치 감시가 중지되었습니다.");
-        }
-      };
-        
+
         
  
     // 환자 리스트를 가져오는 함수

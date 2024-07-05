@@ -3,7 +3,10 @@ package org.hj.service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.hj.mapper.NurseMapper;
+import org.hj.model.GPSInfoVO;
 import org.hj.model.PatientGPSVO;
 import org.hj.model.PatientVO;
 import org.hj.model.UserVO;
@@ -27,7 +30,17 @@ public class NurseServiceImpl implements NurseService {
 	}
 
 	// 선택한 층에 해당하는 담당 환자들 위치 정보 가져오기
-	public ArrayList<PatientGPSVO> getPatientGpsByFloor(Map<String, Object> params){		
+	public ArrayList<PatientGPSVO> getPatientGpsByFloor(
+			Map<String, Object> params) {
 		return nm.getPatientGpsByFloor(params);
+	}
+
+	// 위치 정보 데이터 베이스에 넣어보기
+	public void callInsertEx(GPSInfoVO gvo) {
+		nm.callInsertEx(gvo);
+	}
+	// 위치 정보 꺼내오기
+	public GPSInfoVO getGps(GPSInfoVO gvo) {
+		return nm.getGps(gvo);
 	}
 }
