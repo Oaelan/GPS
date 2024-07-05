@@ -64,7 +64,7 @@
 			<div class="login">
 				<form action="login" method = "POST">
 					<input type="text" placeholder="아이디" name = "id" class="id">
-					<input type="text" placeholder="비밀번호" name = "pw" class="pw">
+					<input type="password" placeholder="비밀번호" name = "pw" class="pw">
 					<input type="submit" value="로그인" class="loginBtn">
 				</form>
 			</div>
