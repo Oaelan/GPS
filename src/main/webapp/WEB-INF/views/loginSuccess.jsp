@@ -101,7 +101,7 @@
 	</div>
 	<div id="clickLatlng"></div>
 	<script src="../resources/JS/main.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aad12cad349dd8370f9aeb3fc04a6f17"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f468622924673dc01ef6bebbdeacc4a2"></script>
 	<script>
 
     // 현재 위치의 위도와 경도를 담는 변수
@@ -130,7 +130,7 @@
     
     async function sendCoordinates(userId, lat, lon) {
         try {
-            const response = await fetch('/api/sendLatLon', {
+            const response = await fetch('/sendLatLon', {
                 method: 'POST', // HTTP 요청 메소드
                 headers: {
                     'Content-Type': 'application/json'  // 요청 헤더 설정
