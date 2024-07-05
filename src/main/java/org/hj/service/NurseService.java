@@ -28,4 +28,10 @@ public interface NurseService {
 	// 위치 정보 꺼내오기
 	public GPSInfoVO getGps(GPSInfoVO gvo);
 
+	// 입원 환자 등록
+	public void addP(PatientVO pvo);
+
+	// 입원 환자 유저 테이블 임시 등록
+	public void addPtoUser(PatientVO pvo);
+
 }

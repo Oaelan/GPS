@@ -44,20 +44,29 @@
 	<!-- mode=IN은 MyBatis에서 파라미터의 전달 방향을 지정 -->
 	<!-- 일단 예시로 watchposition 사용해서 위도 경도 값 받아와지는지 테스트 -->
 	<insert id="callInsertEx" statementType="CALLABLE" parameterType="org.hj.model.GPSInfoVO">
-		CALL insert_ex(#{x, mode=IN}, #{y,
+		CALL insert_gpsInfo(#{x, mode=IN}, #{y,
 		mode=IN}, #{id, mode=IN})
 	</insert>
 	
 	
-	<!-- 환자 위치 가져오기 -->
+	<!-- 로그인한 사람의 위치 가져오기 -->
 	<select id="getGps"
 		resultType="org.hj.model.GPSInfoVO"
 		parameterType="org.hj.model.GPSInfoVO">
 		select *
-		from ex
+		from gps_info
 		where id = #{id}
 	</select>
 	
-
+	
+	<!-- 입원환자 등록  -->
+	<insert id="addP"  parameterType="org.hj.model.PatientVO">
+		insert into patient values(#{p_no},#{p_name},#{p_gender},#{p_id},#{p_phone},#{p_subPhone},#{p_room},#{s_id})
+	</insert>
+	
+	<!-- 입원환자 유저 테이블 임시 등록 -->
+	<insert id="addPtoUser" parameterType="org.hj.model.PatientVO">
+		insert into user (id, pw, name, phone) values(#{p_no},#{p_id},#{p_name},#{p_phone})
+	</insert>
 
 </mapper>

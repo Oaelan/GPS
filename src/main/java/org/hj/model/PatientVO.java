@@ -1,14 +1,16 @@
 package org.hj.model;
 
 public class PatientVO {
-	
+
 	private String p_no;
 	private String p_name;
 	private String p_gender;
 	private String p_id;
 	private String p_phone;
 	private String p_subPhone;
+	private String p_room;
 	private String s_id;
+
 	public final String getP_no() {
 		return p_no;
 	}
@@ -51,15 +53,22 @@ public class PatientVO {
 	public final void setS_id(String s_id) {
 		this.s_id = s_id;
 	}
-	
+
+	public String getP_room() {
+		return p_room;
+	}
+	public void setP_room(String p_room) {
+		this.p_room = p_room;
+	}
 	
 	@Override
 	public String toString() {
-		return "PatientVO [p_no=" + p_no + ", p_name=" + p_name + ", p_gender=" + p_gender + ", p_id=" + p_id
-				+ ", p_phone=" + p_phone + ", p_subPhone=" + p_subPhone + ", s_id=" + s_id + "]";
+		return "PatientVO [p_no=" + p_no + ", p_name=" + p_name + ", p_gender="
+				+ p_gender + ", p_id=" + p_id + ", p_phone=" + p_phone
+				+ ", p_subPhone=" + p_subPhone + ", p_room=" + p_room
+				+ ", s_id=" + s_id + "]";
 	}
 	
 	
-	
-	
+
 }

@@ -67,8 +67,8 @@ public class NurseController {
 	}
 	
 	
-	// 좌표 위치 넣기
-	@PostMapping(value = "/ex1234", produces = "application/json")
+	// 간호사 좌표 위치 DB에 넣기
+	@PostMapping(value = "/getNurseP", produces = "application/json")
 	public String goEx(@RequestBody GPSInfoVO gvo, HttpSession session) {
 	
 		String id = (String)(session.getAttribute("userId"));
@@ -78,7 +78,7 @@ public class NurseController {
 		return "성공 적으로 데이터 전송 성공";
 	}
 	
-	// 좌표 가져오기
+	// DB 간호사 좌표 가져오기
 	@GetMapping(value = "/position", produces = "application/json")
 	public GPSInfoVO getGps(HttpSession session,GPSInfoVO gvo) {
 		System.out.println("좌표가져오기");
@@ -87,4 +87,6 @@ public class NurseController {
 		System.out.println(ns.getGps(gvo));
 		return ns.getGps(gvo);
 	}
+	
+	
 }

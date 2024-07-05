@@ -2,8 +2,10 @@ package org.hj.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.hj.model.PatientVO;
 import org.hj.model.UserVO;
 import org.hj.service.LoginService;
+import org.hj.service.NurseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,8 @@ public class MainController {
 
 	@Autowired
 	private LoginService ls;
+	@Autowired
+	NurseService ns;
 	
 	// 메인 페이지
 	@GetMapping("/")
@@ -60,7 +64,7 @@ public class MainController {
 				session.setAttribute("name", (ls.login(uvo)).getName());
 				session.setAttribute("s_team", s_team);
 				
-				if (s_team.equals("")) {
+				if ((ls.login(uvo)).getS_team() == null) {
 					return "loginSuccess";
 				}
 				
@@ -113,22 +117,25 @@ public class MainController {
 	
 	// 입원 환자 등록 페이지
 	@GetMapping("/patientADD")
-	public String patientADD() {
+	public String goPatientADD() {
 		System.out.println("입원 환자 등록 페이지");
 		return "patientADD";
 	}
 	
 	
-	
-	
-	// 입원 환자 등록 페이지
-		@GetMapping("/1234")
-		public String aaa() {
-			System.out.println("입원 환자 등록 페이지");
-			return "NewFile";
+
+	// 입원 환자 등록 버튼 처리
+		@PostMapping("/patientAddSuccess")
+		public String addP(PatientVO pvo,HttpSession session) {
+			pvo.setS_id((String)session.getAttribute("userId"));
+			ns.addP(pvo);
+			String p_Pw = pvo.getP_id();
+			// 입원환자 정보의 주민번호 앞자리 6개를 유저테이블에 비밀번호로 사용
+			pvo.setP_id(p_Pw.substring(0,6));
+			ns.addPtoUser(pvo);
+			
+			return "addPSuccess";
 		}
-		
-	
 	
 	
 	

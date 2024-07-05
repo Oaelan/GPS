@@ -43,4 +43,13 @@ public class NurseServiceImpl implements NurseService {
 	public GPSInfoVO getGps(GPSInfoVO gvo) {
 		return nm.getGps(gvo);
 	}
+	// 입원 환자 등록
+	public void addP(PatientVO pvo) {
+		nm.addP(pvo);
+	};
+
+	// 입원 환자 유저 테이블 임시 등록
+	public void addPtoUser(PatientVO pvo) {
+		nm.addPtoUser(pvo);
+	};
 }

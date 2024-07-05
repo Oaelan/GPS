@@ -79,7 +79,7 @@
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="content">
 			<div class="add">
-				<form action="">
+				<form action="/patientAddSuccess" method="post">
 					<table>
 						<tr>
 							<td><input type="text" name="p_no" placeholder="입원번호"
@@ -98,8 +98,8 @@
 					<table>
 						<tr id="gender">
 							<td>환자 성별</td>
-							<td><input type="radio" value="m" name="gender">남</td>
-							<td><input type="radio" value="f" name="gender">여</td>
+							<td><input type="radio" value="남자" name="p_gender">남</td>
+							<td><input type="radio" value="여자" name="p_gender">여</td>
 						</tr>
 					</table>
 					<table>

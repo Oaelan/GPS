@@ -105,6 +105,8 @@
         getUserLocation(); // 간호사 현재 위치 마커    
     });
 	 
+    var path = "../resources/IMG/";
+	 
 	//watchId 선언
     var watchId;
   	// 선택한 셀렉트 박스 안의 층수
@@ -140,19 +142,7 @@
     // 지도 드래그 비활성화
     map.setDraggable(true); 
 
-
-    // 층 선택 시 호출되는 함수
-    function selectFloor() {
-        var floorSelect = document.getElementById("floorSelect");
-        currentFloor = floorSelect.value;      
-        // 기존의 마커가 있으면 지도에서 제거합니다
-        if (markerPgps) {
-            markerPgps.setMap(null);
-            markerPgps = null; // 기존 마커 초기화
-        }              
-    }
-   
-   
+     
  
 
  // 사용자의 현재 위치를 가져오는 함수
@@ -166,7 +156,7 @@
             };
 
             // watchPosition을 통해 위치를 지속적으로 감시
-            var watchId = navigator.geolocation.watchPosition(
+            var watchId = navigator.geolocation.watchPosition(	
                 // 위치 가져오기 성공 시 콜백 함수
                 function(position) {
                     var lat = position.coords.latitude; // 위도
@@ -182,7 +172,7 @@
                     };
 
                     // 서버로 위치 데이터 전송
-                    fetch('/nurse/ex1234', {
+                    fetch('/nurse/getNurseP', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -303,15 +293,12 @@
                     .then(response => response.json())
                     .then(P_GPS => {
                         // 가져온 환자 세부 정보를 처리하는 로직 추가
-                        //console.log('P_GPS', P_GPS);
+                        console.log('1234');
+                        console.log('P_GPS', P_GPS);
                         
-                        // P_GPS.z 값에 따라 select 박스 업데이트(z는 층을 나타냄)
-                        var floorSelect = document.getElementById("floorSelect");
-                        floorSelect.value = P_GPS.z;
-                        currentFloor = floorSelect.value;
                         
-                        // 층 변경 시 지도를 업데이트
-                        selectFloor();
+                       
+                        
 
                         // 기존의 마커가 있으면 지도에서 제거합니다
                         if (markerPgps) {
