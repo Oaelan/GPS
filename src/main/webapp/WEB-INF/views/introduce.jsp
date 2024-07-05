@@ -8,6 +8,36 @@
 <title>병원 소개</title>
 <link rel="stylesheet" href="../resources/CSS/main.css">
 <link rel="stylesheet" href="../resources/CSS/introduce.css">
+<link rel="stylesheet" href="../resources/CSS/web.css">
+<style>
+.content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		width: 100%;
+		height: 700px;
+	}
+	.text {
+		color: gray;
+		font-size: 13px;
+		text-align: center;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+	}
+	.map {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid lightgray;
+		width: 300px;
+		height: 300px;
+		position: relative;
+		top: 50px;
+		text-align: center;
+	}
+</style>
 </head>
 <body>
   <div class="container">

@@ -1,118 +1,105 @@
 @charset "UTF-8";
 
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-}
-
-/* 기본 스타일 */
-body {
-	font-family: Arial, sans-serif;
-	margin: 0;
-	padding: 0;
-}
-
-/* 슬라이드 메뉴 스타일 */
-.slide-menu {
-	position: fixed;
-	top: 0;
-	left: -250px; /* 메뉴가 처음에는 화면 밖에 위치 */
-	width: 250px;
-	height: 100%;
-	background-color: rgba(51, 51, 51, 0.9);
-	overflow-x: hidden;
-	transition: 0.3s;
-	padding-top: 60px;
-	z-index: 1000; /* 메뉴가 다른 요소들 위에 있도록 */
-}
-
-.slide-menu a {
-	color: white;
-	text-decoration: none;
-}
-
-.slide-menu ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-.slide-menu ul li {
-	padding: 10px 15px;
-	text-align: left;
-}
-
-.slide-menu ul li a {
-	color: white;
-	text-decoration: none;
-	display: block;
-	font-size: 13px;
-}
-
-.slide-menu ul li a:hover {
-	background-color: #575757;
-}
-
-.slide-menu .closebtn {
-	position: absolute;
-	top: 20px;
-	right: 25px;
-	font-size: 36px;
-	color: white;
-	cursor: pointer;
-}
-
-/* 사용자 메뉴 스타일 */
-.user-menu {
-	position: fixed;
-	top: 0;
-	right: -250px; /* 메뉴가 처음에는 화면 밖에 위치 */
-	width: 250px;
-	height: 100%;
-	background-color: rgba(51, 51, 51, 0.9);
-	overflow-x: hidden;
-	transition: right 0.3s;
-	padding-top: 60px;
-	z-index: 1000; /* 메뉴가 다른 요소들 위에 있도록 */
-}
-
-.user-menu a {
-	color: white;
-	text-decoration: none;
-}
-
-.user-menu ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-.user-menu ul li {
-	padding: 10px 15px;
-	text-align: left;
-}
-
-.user-menu ul li a {
-	color: white;
-	text-decoration: none;
-	display: block;
-	font-size: 13px;
-}
-
-.user-menu ul li a:hover {
-	background-color: #575757;
-}
-
-.user-menu .closebtn {
-	position: absolute;
-	top: 20px; /* 필요에 따라 top 위치 조정 */
-	right: 20px; /* 필요에 따라 right 위치 조정 */
-	font-size: 36px;
-	color: white;
-	cursor: pointer;
-}
-
 /* 모바일 장치용 스타일 */
 @media ( max-width : 600px) {
+	* {
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}
+
+	/* 기본 스타일 */
+	body {
+		font-family: Arial, sans-serif;
+		margin: 0;
+		padding: 0;
+	}
+
+	/* 슬라이드 메뉴 스타일 */
+	.slide-menu {
+		position: fixed;
+		top: 0;
+		left: -250px; /* 메뉴가 처음에는 화면 밖에 위치 */
+		width: 250px;
+		height: 100%;
+		background-color: rgba(51, 51, 51, 0.9);
+		overflow-x: hidden;
+		transition: 0.3s;
+		padding-top: 60px;
+		z-index: 1000; /* 메뉴가 다른 요소들 위에 있도록 */
+	}
+	.slide-menu a {
+		color: white;
+		text-decoration: none;
+	}
+	.slide-menu ul {
+		list-style-type: none;
+		padding: 0;
+	}
+	.slide-menu ul li {
+		padding: 10px 15px;
+		text-align: left;
+	}
+	.slide-menu ul li a {
+		color: white;
+		text-decoration: none;
+		display: block;
+		font-size: 13px;
+	}
+	.slide-menu ul li a:hover {
+		background-color: #575757;
+	}
+	.slide-menu .closebtn {
+		position: absolute;
+		top: 20px;
+		right: 25px;
+		font-size: 36px;
+		color: white;
+		cursor: pointer;
+	}
+
+	/* 사용자 메뉴 스타일 */
+	.user-menu {
+		position: fixed;
+		top: 0;
+		right: -250px; /* 메뉴가 처음에는 화면 밖에 위치 */
+		width: 250px;
+		height: 100%;
+		background-color: rgba(51, 51, 51, 0.9);
+		overflow-x: hidden;
+		transition: right 0.3s;
+		padding-top: 60px;
+		z-index: 1000; /* 메뉴가 다른 요소들 위에 있도록 */
+	}
+	.user-menu a {
+		color: white;
+		text-decoration: none;
+	}
+	.user-menu ul {
+		list-style-type: none;
+		padding: 0;
+	}
+	.user-menu ul li {
+		padding: 10px 15px;
+		text-align: left;
+	}
+	.user-menu ul li a {
+		color: white;
+		text-decoration: none;
+		display: block;
+		font-size: 13px;
+	}
+	.user-menu ul li a:hover {
+		background-color: #575757;
+	}
+	.user-menu .closebtn {
+		position: absolute;
+		top: 20px; /* 필요에 따라 top 위치 조정 */
+		right: 20px; /* 필요에 따라 right 위치 조정 */
+		font-size: 36px;
+		color: white;
+		cursor: pointer;
+	}
 	body {
 		background-color: white;
 	}
@@ -178,7 +165,6 @@ body {
 		width: 100vw;
 		height: 500px;
 	}
-	
 	.login {
 		display: flex;
 		align-items: center;
@@ -190,9 +176,7 @@ body {
 		height: 400px;
 		position: relative;
 		top: 150px;
-		
 	}
-	
 	.id, .pw, .loginBtn {
 		width: 300px;
 		height: 40px;
@@ -204,15 +188,12 @@ body {
 		flex-direction: column;
 		padding-left: 5px;
 	}
-	
 	.id, .pw:focus {
 		outline: none;
 	}
-	
 	.pw, .loginBtn {
 		margin-top: 30px;
 	}
-	
 	.loginBtn {
 		text-align: center;
 		border: none;
@@ -221,3 +202,4 @@ body {
 		position: relative;
 		top: 30px;
 	}
+}
