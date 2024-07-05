@@ -68,7 +68,7 @@ public class MainController {
 					return "loginSuccess";
 				}
 				
-				else if (s_team.equals("master")) {
+				else if (s_team.equals("master"))  {
 					return "loginSuccessNurse";
 				}
 				
