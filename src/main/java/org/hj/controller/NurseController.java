@@ -74,7 +74,7 @@ public class NurseController {
 		String id = (String)(session.getAttribute("userId"));
 		gvo.setId(id);				
 		ns.callInsertEx(gvo);
-		System.out.println(gvo);
+		//System.out.println(gvo);
 		return "성공 적으로 데이터 전송 성공";
 	}
 	
@@ -84,7 +84,7 @@ public class NurseController {
 		System.out.println("좌표가져오기");
 		String id = (String)(session.getAttribute("userId"));
 		gvo.setId(id);
-		System.out.println(ns.getGps(gvo));
+		//System.out.println(ns.getGps(gvo));
 		return ns.getGps(gvo);
 	}
 	

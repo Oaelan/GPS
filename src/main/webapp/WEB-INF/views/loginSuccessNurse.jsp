@@ -76,15 +76,7 @@
 	<div class="container">
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="content">
-			<div id="patientList"></div>
-			<div class="dropdown">
-				<select id="floorSelect" onchange="selectFloor()">
-					<option value="1" class="floor">1층</option>
-					<option value="2" class="floor">2층</option>
-					<option value="3" class="floor">3층</option>
-					<option value="4" class="floor">4층</option>
-				</select>
-			</div>
+			<div id="patientList"></div>	
 			<div class="map">
 				<div id="outShell">
 					<div id="mapshell">
@@ -200,8 +192,10 @@
                             
                             // 카카오 맵 마커 위치 설정
                             markerPosition = new kakao.maps.LatLng(data.x, data.y);
-                            newCenter = new kakao.maps.LatLng(data.x, data.y);
-                            map.setCenter(newCenter);
+                            	
+                            // 마커가 움직일 때 중심 좌표가 마커가 되는것 
+                            /* newCenter = new kakao.maps.LatLng(data.x, data.y);
+                            map.setCenter(newCenter); */
 
                             if (!marker) {
                                 marker = new kakao.maps.Marker({

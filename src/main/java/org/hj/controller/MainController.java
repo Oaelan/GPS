@@ -8,6 +8,7 @@ import org.hj.service.LoginService;
 import org.hj.service.NurseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -51,7 +52,7 @@ public class MainController {
 	}
 	
 	@PostMapping("/login")
-	public String gologinSuccess(HttpSession session, UserVO uvo) {
+	public String gologinSuccess(HttpSession session, UserVO uvo, Model model) {
 		System.out.println("로그인 컨트롤러");
 			// 로그인 페이지 이동
 			if (ls.login(uvo) == null) {
@@ -64,7 +65,9 @@ public class MainController {
 				session.setAttribute("name", (ls.login(uvo)).getName());
 				session.setAttribute("s_team", s_team);
 				
+				// 입원 또는 그냥 일반 사용자라는 뜻
 				if ((ls.login(uvo)).getS_team() == null) {
+					model.addAttribute("loginedType",((ls.login(uvo)).getS_team()));
 					return "loginSuccess";
 				}
 				
@@ -73,6 +76,7 @@ public class MainController {
 				}
 				
 				else {
+					model.addAttribute("loginedType",((ls.login(uvo)).getS_team()));
 					return "loginSuccessNurse";
 				}
 			}
