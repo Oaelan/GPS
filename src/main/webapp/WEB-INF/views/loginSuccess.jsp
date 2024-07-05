@@ -34,7 +34,7 @@
 
 #map {
 	width: 100%;
-	height: 50vh;
+	height: 100%;
 }
 
 #outShell {
@@ -107,9 +107,11 @@
     // 현재 위치의 위도와 경도를 담는 변수
     var lat;
     var lon;
+    var MainmarkerPosition;
+//     var newCenter;  
     var options = {
     		enableHighAccuracy: true,
-    		timeout: 5000,
+    		timeout: 2000,
     		maximumAge:0
     };
 
@@ -127,51 +129,88 @@
 		position: map.getCenter()
 	});
     
+    if (navigator.geolocation) {
+		id = navigator.geolocation.watchPosition(success);
+	} else {
+		var locPosition = new kakao.maps.LatLng(lat, lon);
+		console.log("불가")
+		map.setCenter(locPosition);
+		Mainmarker.setPosition(locPosition);
+	}
     
-    async function sendCoordinates(userId, lat, lon) {
-        try {
-            const response = await fetch('/sendLatLon', {
-                method: 'POST', // HTTP 요청 메소드
-                headers: {
-                    'Content-Type': 'application/json'  // 요청 헤더 설정
-                },
-                body: JSON.stringify({ // 요청 본문 설정
-                    userId: userId,
-                    latitude: lat,
-                    longitude: lon
-                })
-            });
-            const data = await response.json();  // 응답을 JSON으로 변환
-            console.log(data);  // 변환된 데이터를 콘솔에 출력
-        } catch (error) {
-            console.error('Error:', error);  // 오류 처리
-        }
-    }
     
     function success(position) {
     	
-		lat = position.coords.latitude, // 위도 
-		lon = position.coords.longitude; // 경도
+		var lat = position.coords.latitude; // 위도 
+		var lon = position.coords.longitude; // 경도
 		
-		sendCoordinates("${userId}", lat, lon);
+		var data = {
+                x: lat,
+                y: lon
+            };
 		
+		// 서버로 위치 데이터 전송
+	    fetch('/sendLatLon', {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify(data)
+	    })
+	    .then(response => {
+	        if (!response.ok) {
+	            throw new Error('Network response was not ok');
+	        }                     
+	    })
+	    .then(data => {
+	        console.log('Success:', data);
+
+	        // 서버에서 위치 데이터 받아오기
+	        fetch('/u_position')
+	        .then(response => {
+	            if (!response.ok) {
+	                throw new Error('Network response was not ok');
+	            }
+	            return response.json();
+	        })
+	        .then(data => {
+	            console.log('Data received:', data);
+	            
+	            // 카카오 맵 마커 위치 설정
+	            
+	            MainmarkerPosition = new kakao.maps.LatLng(data.x, data.y);
+// 	            newCenter = new kakao.maps.LatLng(data.x, data.y);
+// 	            map.setCenter(newCenter);
+
+	            if (!Mainmarker) {
+	                Mainmarker = new kakao.maps.Marker({
+	                    position: MainmarkerPosition
+	                });
+	                Mainmarker.setMap(map);
+	            } else {
+	                Mainmarker.setPosition(MainmarkerPosition);
+	            }
+	        })
+	        .catch(error => {
+	            console.error('Error:', error);
+	        });
+	    })
+	    .catch(error => {
+	        console.error('Error:', error);
+	    });
+		
+		options;
 		
 		// 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
-		var locPosition = new kakao.maps.LatLng(lat, lon)
-		Mainmarker.setPosition(locPosition);
 		var resultDiv = document.getElementById('result');
 		resultDiv.innerHTML = "위도: " + lat + "<br>";
 		resultDiv.innerHTML += "경도: " + lon;
 	}
 
-	if (navigator.geolocation) {
-		id = navigator.geolocation.watchPosition(success);
-
-	} else {
-		var locPosition = new kakao.maps.LatLng(lat, lon);
-		map.setCenter(locPosition);
-		Mainmarker.setPosition(locPosition);
-	}
+	
+	
+	
+	
 	
 	function panTo(lat, lon) {
 	    // 이동할 위도 경도 위치를 생성합니다 
@@ -182,8 +221,9 @@
 	    map.panTo(moveLatLon);            
 	} 
 		
+	
+	
 		// 장소 위치 지정
-		
 		var positions = [
 		    {
 		    	name: '장소1',
@@ -210,8 +250,10 @@
 	
 		
 		
+		
 		var allInfowindow = [];
 		var allMarker = [];
+		
 		// 장소 마커 생성 및 인포윈도우 등록
 		positions.forEach(function (position, index) {
 			var marker = new kakao.maps.Marker({
@@ -256,26 +298,8 @@
 		
 		
 		
-		// 현위치  인포윈도우
-		var MainIwContent = '<div style="padding:5px;">현위치<br><a href="" style="color:blue" target="_blank">ㅁ</a> <a href="" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-		MainIwPosition = new kakao.maps.LatLng(lat, lon); //인포윈도우 표시 위치입니다
 
-		var MainInfowindow = new kakao.maps.InfoWindow({
-			position : (lat, lon),
-			content : MainIwContent
-		});
-
-	
 		
-		
-		//인포윈도우 표시
-		MainInfowindow.open(map, Mainmarker);
-
-		// 지도 드래그 비활성화
-		/*     map.setDraggable(false);  */
-
-		// 지도에 마커 표시하는거 	
-		Mainmarker.setMap(map);
 
 	</script>
 	
