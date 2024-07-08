@@ -59,7 +59,7 @@
   <div class="container">
   <jsp:include page="header.jsp"></jsp:include>
     <div class="content">
-    <a href="">>>의료진 회원가입</a>
+    <a href="signNurse">>>의료진 회원가입</a>
     	<div class="sign">
     		<form action="">
     		<table>

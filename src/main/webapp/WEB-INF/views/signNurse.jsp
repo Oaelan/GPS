@@ -65,7 +65,7 @@
   <jsp:include page="header.jsp"></jsp:include>
     <div class="content">
     	<div class="sign">
-    		<form action="">
+    		<form action="putSignNurse" method = "POST">
 			<table>
     			<tr>
     				<td><input type="text" name="id" placeholder="아이디" class="id"></td>

@@ -53,4 +53,12 @@
 		where p_no = #{p_no};
 	</delete>
 
+
+	<!-- 간호사 회원가입 정보 입력 -->
+	<insert id="putSignNurse" parameterType="org.hj.model.UserVO">
+		INSERT INTO user
+		(id, pw, name, phone, s_team, acceptNurse)
+		VALUES
+		(#{id}, #{pw},#{name},#{phone},#{s_team},0)
+	</insert>
 </mapper>
