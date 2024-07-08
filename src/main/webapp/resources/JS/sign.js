@@ -9,12 +9,12 @@
 	idLabel.textContent = ".";
 	idLabel.style.color = "white";
 	userId.addEventListener("blur", () => {
-	    var userIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,20}$/;
+	    var userIdPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,20}$/;
 	    if (userId.value.match(userIdPattern)) {
 	        idLabel.textContent = "사용 가능한 아이디입니다.";
 	        idLabel.style.color = "green";
 	    } else {
-	        idLabel.textContent = "사용자 ID는 영문자와 숫자를 조합하여 5-20자여야 합니다.";
+	        idLabel.textContent = "사용자 ID는 영문자와 숫자를 조합하여 7-20자여야 합니다.";
 	        idLabel.style.color = "red";
 	    }
 	});
