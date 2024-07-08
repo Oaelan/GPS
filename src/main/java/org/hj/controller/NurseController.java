@@ -56,37 +56,39 @@ public class NurseController {
 		String userId = (String) session.getAttribute("userId");
 
 		// 맵 생성 및 매개변수 설정
-	    Map<String, Object> params = new HashMap<>();
-	    params.put("userId", userId);
-	    params.put("z", z);
-		
-	    // 매퍼 호출
-	    List<PatientGPSVO> result = ns.getPatientGpsByFloor(params);
-	    System.out.println(result); // 로그 확인용
+		Map<String, Object> params = new HashMap<>();
+		params.put("userId", userId);
+		params.put("z", z);
+
+		// 매퍼 호출
+		List<PatientGPSVO> result = ns.getPatientGpsByFloor(params);
+		System.out.println(result); // 로그 확인용
 		return result;
 	}
-	
-	
+
 	// 간호사 좌표 위치 DB에 넣기
 	@PostMapping(value = "/getNurseP", produces = "application/json")
 	public String goEx(@RequestBody GPSInfoVO gvo, HttpSession session) {
-	
-		String id = (String)(session.getAttribute("userId"));
-		gvo.setId(id);				
-		ns.callInsertEx(gvo);
-		//System.out.println(gvo);
-		return "성공 적으로 데이터 전송 성공";
+		if (session.getAttribute("userId") != null) {
+			String id = (String) (session.getAttribute("userId"));
+			gvo.setId(id);
+			ns.callInsertEx(gvo);
+			// System.out.println(gvo);
+			return "성공 적으로 데이터 전송 성공";
+		} else {
+			return "로그아웃 후 위치 전송 불가";
+		}
+
 	}
-	
+
 	// DB 간호사 좌표 가져오기
 	@GetMapping(value = "/position", produces = "application/json")
-	public GPSInfoVO getGps(HttpSession session,GPSInfoVO gvo) {
+	public GPSInfoVO getGps(HttpSession session, GPSInfoVO gvo) {
 		System.out.println("좌표가져오기");
-		String id = (String)(session.getAttribute("userId"));
+		String id = (String) (session.getAttribute("userId"));
 		gvo.setId(id);
-		//System.out.println(ns.getGps(gvo));
+		// System.out.println(ns.getGps(gvo));
 		return ns.getGps(gvo);
 	}
-	
-	
+
 }

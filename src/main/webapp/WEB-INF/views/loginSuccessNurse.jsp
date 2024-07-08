@@ -185,6 +185,13 @@
                         })
                         .then(data => {
                             console.log('Data received:', data);
+                            // 내 위치를 찍을 마커 이미지 
+                           	var imageSrcForP= path + "redM.png"; // 마커이미지의 주소입니다    
+                            var imageSizeForP = new kakao.maps.Size(45, 50); // 마커이미지의 크기입니다
+                            var imageOptionForP = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                            var markerImageForP = new kakao.maps.MarkerImage(imageSrcForP, imageSizeForP, imageOptionForP); 
+                            
+                            
                             
                             // 카카오 맵 마커 위치 설정
                             markerPosition = new kakao.maps.LatLng(data.x, data.y);
@@ -195,7 +202,8 @@
 
                             if (!marker) {
                                 marker = new kakao.maps.Marker({
-                                    position: markerPosition
+                                    position: markerPosition,
+                                    image: markerImageForP
                                 });
                                 marker.setMap(map);
                             } else {
