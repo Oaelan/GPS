@@ -8,4 +8,8 @@ public interface MasterMapper {
 	
 	public List<UserVO> getAcceptList();
 	
+	public void accept(String id);
+	
+	public void reject(String id);
+	
 }
