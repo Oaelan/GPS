@@ -4,73 +4,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>간호사 로그인</title>
-<link rel="stylesheet" href="../resources/CSS/main.css">
-<link rel="stylesheet" href="../resources/CSS/loginSuccessNurse.css?ver=41342">
+<link rel="stylesheet" href="../resources/CSS/loginSuccessNurse.css?ver=12454">
 <link rel="stylesheet" href="../resources/CSS/web.css">
-<style type="text/css">
-.controls {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 30px;
-	margin-top: 60px;
-}
-
-.controls input[type=button] {
-	width: 70px;
-	height: 70px;
-	font-size: 30px;
-	text-align: center;
-}
-
-#mapshell {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	position: relative;
-}
-
-#map {
-	width: 100%;
-	height: 100%;
-}
-
-#outShell {
-	width: 100%;
-	height: 600px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	display: flex;
-}
-
-#patientList {
-	border: 1px solid black;
-	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	width: 95%;
-}
-
-.patient {
-	text-align: center;
-	padding: 10px;
-	border-bottom: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	cursor: pointer; /* 클릭 가능한 요소로 설정 */
-}
-
-.patient:nth-child(4n) {
-	border-right: none;
-}
-
-.patient.clicked {
-	background-color: #4CAF50;
-	color: white;
-}
+<title>간호사 로그인</title>
+<style>
+	#patientList {
+		border: 1px solid lightgrey;
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		width: 100%;
+	}
+	.controls {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 30px;
+		margin-top: 60px;
+	}
+	.controls input[type=button] {
+		width: 70px;
+		height: 70px;
+		font-size: 30px;
+		text-align: center;
+	}
+	#mapshell {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}
+	#map {
+		width: 100%;
+		height: 100%;
+	}
+	#outShell {
+		width: 100%;
+		height: 600px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+	}
+	.patient {
+		text-align: center;
+		padding: 10px;
+		border-bottom: 1px solid #ccc;
+		border-right: 1px solid #ccc;
+		cursor: pointer; /* 클릭 가능한 요소로 설정 */
+	}
+	.patient:nth-child(4n) {
+		border-right: none;
+	}
+	.patient.clicked {
+		background-color: #4CAF50;
+		color: white;
+	}
 </style>
 </head>
 <body>
@@ -275,7 +266,7 @@ function fetchPatients() {
 
                 // 클릭된 요소에만 clicked 클래스를 추가
                 this.classList.add('clicked');
-
+                notUseGpsService();
                 // 선택된 환자의 p_no을 콘솔에 출력합니다
                 var selectedPNo = patient.p_no;
                 //console.log('Selected Patient p_no:', selectedPNo);
@@ -293,6 +284,7 @@ function fetchPatients() {
     .catch(error => console.error('Error fetching patients:', error));
 }
 
+// 입원 환자가 위치 서비스를 이용하지 않고 있을 때 위도의 값은 null
 var UseGpsServiceOrNot;
 // 담당 입원 환자가 위치 서비스를 이용하지 않고 있을 때
 function notUseGpsService(UseGpsServiceOrNot){
