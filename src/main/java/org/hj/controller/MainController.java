@@ -36,6 +36,13 @@ public class MainController {
 		return "loginSuccess";
 	}
 
+	// 입원 환자 성공 페이지
+	@GetMapping("/loginSuccessForEnterH")
+	public String loginSuccessForEnterH() {
+		System.out.println("입원환자 로그인 성공");
+		return "loginSuccessForEnterH";
+	}
+
 	// 간호사 로그인 성공 페이지
 	@GetMapping("/loginSuccessNurse")
 	public String loginSuccessNurse() {
@@ -85,22 +92,22 @@ public class MainController {
 					pgvo.setP_subPhone(p_subPhone);
 					pgvo.setP_room(p_room);
 					ls.addPGPSInfo(pgvo);
-
 					return "loginSuccessForEnterH";
 				} else {
 					return "loginSuccess";
 				}
 
 			}
-
+				// 마스터로 로그인 했을 때
 			else if (s_team.equals("master")) {
 				model.addAttribute("loginedType",
 						((ls.login(uvo)).getS_team()));
 				System.out.println(session.getAttribute("s_team"));
 				return "loginSuccessNurse";
 			}
-
+				// 간호사 로그인 했을 때
 			else {
+				// 나중에 회원가입 처리 중인 간호사의 NurseAccept이거 유무 조건 넣기 
 				model.addAttribute("loginedType",
 						((ls.login(uvo)).getS_team()));
 				return "loginSuccessNurse";
@@ -109,17 +116,17 @@ public class MainController {
 
 	}
 
-	//로그아웃 하기
-	  @GetMapping("/logout")
-	  public String logout(HttpSession session, PatientVO pvo) {		  
-		  if (session != null) {
-			  	pvo.setP_no((String)(session.getAttribute("userId")));
-			  	ls.logoutDelP_GPS(pvo);
-	            session.invalidate(); // 세션 무효화
-	        }
-		  return "redirect:/";
-	  }
-	
+	// 로그아웃 하기
+	@GetMapping("/logout")
+	public String logout(HttpSession session, PatientVO pvo) {
+		if (session != null) {
+			pvo.setP_no((String) (session.getAttribute("userId")));
+			ls.logoutDelP_GPS(pvo);
+			session.invalidate(); // 세션 무효화
+		}
+		return "redirect:/";
+	}
+
 	// 환자 회원가입 페이지
 	@GetMapping("/sign")
 	public String sign() {
@@ -140,15 +147,14 @@ public class MainController {
 		ls.putSignNurse(uvo);
 		return "signNurseSuccess";
 	}
-	
+
 	// 일반 회원정보 입력
-		@PostMapping("/putSignNormal")
-		public String putSignNormal(UserVO uvo) {
-			ls.putSignNormal(uvo);
-			return "signNormalSuccess";
-		}
-		
-		
+	@PostMapping("/putSignNormal")
+	public String putSignNormal(UserVO uvo) {
+		ls.putSignNormal(uvo);
+		return "signNormalSuccess";
+	}
+
 	// 병원 소개
 	@GetMapping("/introduce")
 	public String introduce() {

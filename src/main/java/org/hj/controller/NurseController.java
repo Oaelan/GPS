@@ -40,8 +40,8 @@ public class NurseController {
 	@GetMapping(value = "/getPatientGps", produces = "application/json")
 	public PatientGPSVO getPatientGps(@RequestParam String p_no,
 			PatientGPSVO pgvo) {
-		System.out.println("환자 GPS 정보 가져오기");
 		pgvo.setP_no(p_no);
+		System.out.println(ns.getPatientGps(pgvo));
 		// System.out.println(ns.getPatientGps(pgvo));
 		return ns.getPatientGps(pgvo);
 	}

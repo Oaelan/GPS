@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -76,6 +75,11 @@
 	background-color: #3e8e41;
 	transform: scale(1);
 }
+
+.hospital {
+	text-align: center;
+	width: 150px;
+}
 </style>
 </head>
 <body>
@@ -90,16 +94,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="controls">
-				<div id="result"></div>
-				<br>
-				<div id="result2"></div>
-				<br>
-				
-			</div>
 		</div>
 	</div>
-	<div id="clickLatlng"></div>
 	<script src="../resources/JS/main.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f468622924673dc01ef6bebbdeacc4a2"></script>
 	<script>
@@ -334,28 +330,23 @@
 	
 	
 		// 장소 위치 지정
-		var positions = [
-		    {
-		    	name: '장소1',
-		        content: '<div>장소1</div>', 
-		        latlng: new kakao.maps.LatLng(35.5423652, 129.338211)
-		    },
-		    {
-		    	name: '장소2',
-		        content: '<div>장소2</div>', 
-		        latlng: new kakao.maps.LatLng(35.542333, 129.3379557)
-		    },
-		    {
-		    	name: '장소3',
-		        content: '<div>장소3</div>', 
-		        latlng: new kakao.maps.LatLng(35.5421725, 129.3379185)
-		    },
-		    {
-		    	name: '장소4',
-		        content: '<div>장소4</div>',
-		        latlng: new kakao.maps.LatLng(35.5421649, 129.3376515)
-		    }
-		];
+        var positions = [ {
+            name : '본관',
+            content : '<div class="hospital">본관</div>',
+            latlng : new kakao.maps.LatLng(35.54234,129.3382079)
+        }, {
+            name : '별관1',
+            content : '<div class="hospital">별관1</div>',
+            latlng : new kakao.maps.LatLng(35.5420148,129.3385003)
+        }, {
+            name : '별관2',
+            content : '<div class="hospital">별관2</div>',
+            latlng : new kakao.maps.LatLng(35.5420714,129.3379235)
+        }, {
+            name : '별관3',
+            content : '<div class="hospital">별관3</div>',
+            latlng : new kakao.maps.LatLng(35.542076,129.3376224)
+        } ];
 		
 	
 		

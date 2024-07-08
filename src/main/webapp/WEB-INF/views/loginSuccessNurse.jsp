@@ -87,8 +87,6 @@
 			</div>
 		</div>
 	</div>
-	<div id="position" style="margin-top: 100px;"></div>
-	<div id="clickLatlng"></div>
 	<script src="../resources/JS/main.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f468622924673dc01ef6bebbdeacc4a2"></script>
 	<script>
@@ -152,8 +150,8 @@
                     var lon = position.coords.longitude; // 경도
                     var markerPosition;
 
-                    console.log('현재 위치:', lat, lon);
-                    document.getElementById("position").innerHTML = "위도: " + lat + "<br> 경도: " + lon;
+                   // console.log('현재 위치:', lat, lon);
+                  
 
                     var data = {
                         x: lat,
@@ -174,7 +172,7 @@
                         }                     
                     })
                     .then(data => {
-                        console.log('Success:', data);
+                       // console.log('Success:', data);
 
                         // 서버에서 위치 데이터 받아오기
                         fetch('/nurse/position')
@@ -185,7 +183,7 @@
                             return response.json();
                         })
                         .then(data => {
-                            console.log('Data received:', data);
+                            //console.log('Data received:', data);
                             // 내 위치를 찍을 마커 이미지 
                            	var imageSrcForP= path + "redM.png"; // 마커이미지의 주소입니다    
                             var imageSizeForP = new kakao.maps.Size(45, 50); // 마커이미지의 크기입니다
@@ -246,7 +244,7 @@
 
         
  
-    // 환자 리스트를 가져오는 함수
+   
 // 환자 리스트를 가져오는 함수
 function fetchPatients() {
     fetch('/nurse/getPList', {
@@ -295,6 +293,15 @@ function fetchPatients() {
     .catch(error => console.error('Error fetching patients:', error));
 }
 
+var UseGpsServiceOrNot;
+// 담당 입원 환자가 위치 서비스를 이용하지 않고 있을 때
+function notUseGpsService(UseGpsServiceOrNot){
+    if(UseGpsServiceOrNot == null){
+        alert("현재 환자가 위치 정보 서비스를 이용하지 않습니다.");
+    }
+}
+
+
 // 환자 위치 정보를 가져오는 함수
 function fetchPatientDetails(p_no) {
     fetch('/nurse/getPatientGps?p_no=' + p_no, {
@@ -302,11 +309,12 @@ function fetchPatientDetails(p_no) {
             'Accept': 'application/json'
         }
     })
-    .then(response => response.json())
+   	.then(response => response.json())                      
     .then(P_GPS => {
+        UseGpsServiceOrNot = P_GPS.x;
         // 가져온 환자 세부 정보를 처리하는 로직 추가
-        console.log('P_GPS', P_GPS);
-
+        //console.log('P_GPS', P_GPS);
+		
         // 기존의 마커가 있으면 지도에서 제거합니다
         if (markerPgps) {
             markerPgps.setMap(null);
@@ -342,7 +350,7 @@ function fetchPatientDetails(p_no) {
 
         // 마커 위에 인포윈도우를 표시합니다
         currentInfowindow.open(map, markerPgps);
-
+		
     })
     .catch(error => console.error('Error fetching patient details:', error));
 }
