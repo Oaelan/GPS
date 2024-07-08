@@ -19,4 +19,12 @@ public class MasterServiceImpl implements MasterService{
 		System.out.println(mm.getAcceptList());
 		return mm.getAcceptList();
 	}
+	
+	public void accept(String id) {
+		mm.accept(id);
+	}
+	
+	public void reject(String id) {
+		mm.reject(id);
+	}
 }

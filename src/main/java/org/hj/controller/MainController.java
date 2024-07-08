@@ -1,6 +1,7 @@
 package org.hj.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 
@@ -220,5 +224,21 @@ public class MainController {
 		    System.out.println(acceptList);
 			return "masterPage";
 		}
+		
+	@PostMapping(value = "/updateStatus")
+	@ResponseBody
+	public String updateStatus(@RequestBody Map<String, String> user) {
+		String id = user.get("id");
+        String action = user.get("action");
+        
+		if ("accept".equals(action)) {
+		    ms.accept(id); // 회원 수락 로직 구현
+		    return "ACCEPTED";
+		} else if ("reject".equals(action)) {
+		    ms.reject(id); // 회원 거절 로직 구현
+		    return "REJECTED";
+		}
+		return "알 수 없는 작업입니다.";
+	}
 		
 }

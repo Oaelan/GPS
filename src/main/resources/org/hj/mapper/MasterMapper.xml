@@ -12,4 +12,14 @@
 		where (acceptNurse = false) and s_team is not null;
 	</select>
 
+	<update id="accept">
+        UPDATE user SET acceptNurse = true 
+        WHERE id = #{id}
+    </update>
+
+    <delete id="reject">
+        DELETE FROM user
+        WHERE id = #{id}
+    </delete>
+
 </mapper>

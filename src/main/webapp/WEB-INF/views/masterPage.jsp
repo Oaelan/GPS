@@ -56,16 +56,42 @@
 </style>
 </head>
 <body>
-  <div class="container">
-  <jsp:include page="header.jsp"></jsp:include>
-    <div class="content">
-    	<div id = "acceptList">
-			<!-- 회원가입 신청한 간호사 목록 띄우기 -->
-    		<c:forEach var="acceptList" items="${acceptList}">
-                <div>${acceptList.id} ${acceptList.name} ${acceptList.s_team}</div>
-            </c:forEach>
-    	</div>
-    </div>
-  </div>
+	<div class="container">
+		<jsp:include page="header.jsp"></jsp:include>
+		<div class="content">
+			<div id="acceptList">
+				<!-- 회원가입 신청한 간호사 목록 띄우기 -->
+				<c:forEach var="acceptList" items="${acceptList}">
+					<div>${acceptList.id}${acceptList.name} ${acceptList.s_team}</div>
+					<div>
+						<input type="button" value="수락" onclick="handleAccept('${acceptList.id}', 'accept')">
+						<input type="button" value="거절" onclick="handleAccept('${acceptList.id}', 'reject')">
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
+	<script>
+	function handleAccept(id, action) {
+		
+		var data = {
+				id: id,
+				action: action
+            };
+	    fetch('/updateStatus', {
+	      method: 'POST',
+	      headers: {
+	        'Content-Type': 'application/json'
+	      },
+	      body: JSON.stringify(data)
+	    })
+	    .then(response => response.text())
+	    .then(data => {
+	      alert(String(data));
+	      location.reload(); // 작업 후 페이지 새로 고침
+	    })
+	    .catch(error => console.error('Error:', error));
+	  }
+	</script>
 </body>
 </html>
