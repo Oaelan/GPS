@@ -7,6 +7,7 @@
 <title>환자 로그인</title>
 <link rel="stylesheet" href="../resources/CSS/main.css">
 <link rel="stylesheet" href="../resources/CSS/loginSuccess.css">
+<link rel="stylesheet" href="../resources/CSS/web.css">
 <style type="text/css">
 .controls {
 	display: flex;
