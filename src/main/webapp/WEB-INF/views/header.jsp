@@ -10,9 +10,17 @@
     
     <div class="Menu">
     	<img src="../resources/IMG/menu_bar.png" class="menuBar" onclick="toggleMenu()">
-    	<div class="title">Green Hospital
-    	</div>
-    	<img src="../resources/IMG/user.png" class="user" onclick="openUserMenu()">
+			<c:if test="${userId == null}">
+				<div class="title">
+					<a href="/" style="text-decoration: none; font-weight: bold; color: white;">Green Hospital</a>
+				</div>
+			</c:if>
+			<c:if test="${userId != null}">
+				<div class="title">
+					<a href="/introduce" style="text-decoration: none; font-weight: bold; color: white;">Green Hospital</a>
+				</div>
+			</c:if>			
+	<img src="../resources/IMG/user.png" class="user" onclick="openUserMenu()">
     	
 	</div>
 	 <div id="slideMenu" class="slide-menu">
