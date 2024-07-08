@@ -1,11 +1,14 @@
 package org.hj.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.hj.model.PatientGPSVO;
 import org.hj.model.PatientVO;
 import org.hj.model.UserVO;
 import org.hj.service.LoginService;
+import org.hj.service.MasterService;
 import org.hj.service.NurseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +22,14 @@ public class MainController {
 
 	@Autowired
 	private LoginService ls;
+	
 	@Autowired
 	NurseService ns;
 
+	@Autowired
+	private MasterService ms;
+
+	
 	// 메인 페이지
 	@GetMapping("/")
 	public String main() {
@@ -202,4 +210,15 @@ public class MainController {
 		System.out.println("좌표 연습");
 		return "Map2";
 	}
+	
+	// 마스터 페이지 이동(간호사 회원가입 신청 정보 받아옴)
+		@GetMapping("/masterPage")
+		public String masterPage(Model model) {
+			System.out.println("마스터 페이지 이동");
+			List<UserVO> acceptList = ms.getAcceptList();
+		    model.addAttribute("acceptList", acceptList);
+		    System.out.println(acceptList);
+			return "masterPage";
+		}
+		
 }
