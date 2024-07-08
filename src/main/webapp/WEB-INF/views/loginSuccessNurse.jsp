@@ -7,6 +7,7 @@
 <title>간호사 로그인</title>
 <link rel="stylesheet" href="../resources/CSS/main.css">
 <link rel="stylesheet" href="../resources/CSS/loginSuccessNurse.css?ver=41342">
+<link rel="stylesheet" href="../resources/CSS/web.css">
 <style type="text/css">
 .controls {
 	display: flex;
