@@ -159,9 +159,7 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
-		width: 100vw;
 		height: 800px;
-		gap:30px;
 	}
 	.sign {
 		display: flex;
