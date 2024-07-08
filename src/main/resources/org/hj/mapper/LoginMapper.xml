@@ -5,16 +5,52 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  
-  <mapper namespace="org.hj.mapper.LoginMapper">
-  	
-  	<!--  로그인할 때 값을 가져옴 -->	
-  	<select id="login" resultType="org.hj.model.UserVO">
-  		select id, name, s_team
-  		from user
-  		where id=#{id} and pw=#{pw}
-  	</select>
-  
 
-  	
-  </mapper>
+<mapper namespace="org.hj.mapper.LoginMapper">
+
+	<!-- 로그인할 때 값을 가져옴 -->
+	<select id="login" resultType="org.hj.model.UserVO">
+		select id, name, s_team
+		from user
+		where id=#{id} and pw=#{pw}
+	</select>
+
+
+	<!-- 입원 환자가 로그인 했을 때 정보 가져오기 -->
+	<select id="getPInfo" resultType="org.hj.model.PatientVO"
+		parameterType="org.hj.model.UserVO">
+		select p_no, p_name, p_gender, p_phone, p_subPhone,
+		p_room, s_id
+		from patient
+		where p_no=#{id}
+	</select>
+
+	<!-- 입원 환자가 로그인 했을 때 가져온 정보를 환자 gps에 등록-->
+	<insert id="addPGPSInfo" parameterType="org.hj.model.PatientGPSVO">
+		INSERT INTO patient_gps
+		(p_no, p_name, p_gender, p_phone, p_subPhone, p_room)
+		VALUES
+		(#{p_no}, #{p_name},#{p_gender},#{p_phone},#{p_subPhone},#{p_room})
+	</insert>
+	
+	<!-- 환자가 로그인을 했을 때 받아오는 위치 정보 업데이트  -->
+	<update id="addPGPS_XY" parameterType="org.hj.model.PatientGPSVO">
+		update patient_gps set x = #{x}, y = #{y}
+		where p_no = #{p_no};
+	</update>
+	
+	<!--  환자 위치 정보 가져와서 마커 표시하기 -->
+	<select id="getP_XY" resultType="org.hj.model.PatientGPSVO"
+		parameterType="org.hj.model.UserVO">
+		select x,y
+		from patient_gps
+		where p_no=#{id}
+	</select>
+	
+	<!--  로그 아웃 했을 때 patient_GPS에서 데이터 삭제 하기  -->
+	<delete id="logoutDelP_GPS" parameterType="org.hj.model.PatientVO">
+		delete from patient_gps
+		where p_no = #{p_no};
+	</delete>
+
+</mapper>

@@ -239,7 +239,7 @@
                     };
 
                     // 서버로 위치 데이터 전송
-                    fetch('/sendLatLon', {
+                    fetch('/nurse/getNurseP', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -255,7 +255,7 @@
                         console.log('Success:', data);
 
                         // 서버에서 위치 데이터 받아오기
-                        fetch('/u_position')
+                        fetch('/nurse/position')
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Network response was not ok');

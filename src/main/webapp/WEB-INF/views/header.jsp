@@ -39,8 +39,14 @@
 	<div id="userMenu" class="user-menu">
     <a href="#" class="closebtn" onclick="closeUserMenu()">&times;</a>
     <ul>
-      <li><a href="/">로그아웃</a></li>
-      <li><a href="/MyPage">마이페이지</a></li>
-    </ul>
+		<c:if test="${userId == null}">
+			<li><a href="/login">로그인</a></li>
+			<li><a href="/sign">회원가입</a></li>
+		</c:if>
+		<c:if test="${userId != null}">
+			<li><a href="/logout">로그아웃</a></li>
+			<li><a href="/MyPage">마이페이지</a></li>
+		</c:if>
+	</ul>
   </div>
   <script src="../resources/JS/main.js"></script>

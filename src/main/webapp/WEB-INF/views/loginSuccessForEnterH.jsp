@@ -215,6 +215,7 @@
     
 	 // 사용자의 현재 위치를 가져오는 함수
 	 getUserLocation();
+	
     function getUserLocation() {
         if (navigator.geolocation) {
             // watchPosition을 사용하여 위치 1초마다 감시
