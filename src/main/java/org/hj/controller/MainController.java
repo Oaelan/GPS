@@ -141,6 +141,14 @@ public class MainController {
 		return "signNurseSuccess";
 	}
 	
+	// 일반 회원정보 입력
+		@PostMapping("/putSignNormal")
+		public String putSignNormal(UserVO uvo) {
+			ls.putSignNormal(uvo);
+			return "signNormalSuccess";
+		}
+		
+		
 	// 병원 소개
 	@GetMapping("/introduce")
 	public String introduce() {

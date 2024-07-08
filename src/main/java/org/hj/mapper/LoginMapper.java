@@ -12,5 +12,7 @@ public interface LoginMapper {
 	public PatientGPSVO getP_XY (UserVO uvo);
 	public void logoutDelP_GPS (PatientVO pvo);
 	public void putSignNurse(UserVO uvo);
+	public void putSignNormal(UserVO uvo);
+	
 		
 }

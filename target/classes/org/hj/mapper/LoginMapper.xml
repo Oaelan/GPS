@@ -61,4 +61,13 @@
 		VALUES
 		(#{id}, #{pw},#{name},#{phone},#{s_team},0)
 	</insert>
+	
+	<!-- 일반 회원가입 정보 입력 -->
+	<insert id="putSignNormal" parameterType="org.hj.model.UserVO">
+		INSERT INTO user
+		(id, pw, name, phone, s_team)
+		VALUES
+		(#{id}, #{pw},#{name},#{phone},#{s_team})
+	</insert>
+	
 </mapper>
