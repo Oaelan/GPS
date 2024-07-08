@@ -134,6 +134,13 @@ public class MainController {
 		return "signNurse";
 	}
 
+	// 간호사 회원정보 입력
+	@PostMapping("/putSignNurse")
+	public String putSignNurse(UserVO uvo) {
+		ls.putSignNurse(uvo);
+		return "signNurseSuccess";
+	}
+	
 	// 병원 소개
 	@GetMapping("/introduce")
 	public String introduce() {

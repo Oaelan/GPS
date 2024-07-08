@@ -31,4 +31,7 @@ public class LoginServiceImpl implements LoginService{
 	public void logoutDelP_GPS (PatientVO pvo) {
 		lm.logoutDelP_GPS(pvo);
 	}
+	public void putSignNurse(UserVO uvo) {
+		lm.putSignNurse(uvo);
+	}
 }
