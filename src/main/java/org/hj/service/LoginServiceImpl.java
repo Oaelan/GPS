@@ -34,4 +34,8 @@ public class LoginServiceImpl implements LoginService{
 	public void putSignNurse(UserVO uvo) {
 		lm.putSignNurse(uvo);
 	}
+	
+	public void putSignNormal(UserVO uvo) {
+		lm.putSignNormal(uvo);
+	}
 }
