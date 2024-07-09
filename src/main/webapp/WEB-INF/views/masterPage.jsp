@@ -11,13 +11,12 @@
 <link rel="stylesheet" href="../resources/CSS/main.css?ver=3546">
 <link rel="stylesheet" href="../resources/CSS/web.css">
 <style type="text/css">
+
 	.content {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		width: 100vw;
-		height: 700px;
+	    display: flex;
+	    width: 100vw;
+	    flex-direction: column;
+	    align-items: center;
 	}
 	.text {
 		color: gray;
@@ -53,17 +52,56 @@
 		border: none;
 		color: white;
 	}
+
+	#list{
+		display: flex;
+    	width: 100%;
+    	justify-content: center;
+    	align-items: center;
+	}
+	.acceptL{    
+		display: flex;
+	    align-items: flex-end;
+	    width: 80%;
+	    margin: 20px 20px;
+        font-size: 25px;
+        justify-content: space-evenly;
+	}
+	
+	.acceptB{
+		width: 20%;
+	}    
+	
+	.acceptB>input{
+		width: 65px;
+		height:35px;
+	}   
 </style>
 </head>
 <body>
 	<div class="container">
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="content">
-			<div id="acceptList">
+			<div style = "margin-bottom: 50px">
+				<h1> 간호사 회원가입 신청 목록</h1>
+			</div>
+			<div id="list">
 				<!-- 회원가입 신청한 간호사 목록 띄우기 -->
 				<c:forEach var="acceptList" items="${acceptList}">
-					<div>${acceptList.id}${acceptList.name} ${acceptList.s_team}</div>
-					<div>
+					<div class = "acceptL">
+					
+						<div>
+							${acceptList.id}
+						</div>
+						<div>
+						 	${acceptList.name}
+						</div>
+						<div>
+						 	${acceptList.s_team}
+						</div>
+					
+					</div>
+					<div class = "acceptB">
 						<input type="button" value="수락" onclick="handleAccept('${acceptList.id}', 'accept')">
 						<input type="button" value="거절" onclick="handleAccept('${acceptList.id}', 'reject')">
 					</div>
