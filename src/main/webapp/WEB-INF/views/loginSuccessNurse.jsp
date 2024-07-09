@@ -365,7 +365,17 @@ function fetchPatientDetails(p_no) {
         // 마커 위에 인포윈도우를 표시합니다
         currentInfowindow.open(map, markerPgps);
         
-        
+        var infowindowOpened = false;
+		kakao.maps.event.addListener(markerPgps, 'click', function () {
+			if (infowindowOpened) {
+			    currentInfowindow.close();
+				infowindowOpened = false;
+			} else {
+			    currentInfowindow.open(map, markerPgps);
+				infowindowOpened = true;
+			}
+		});
+		
         newCenter = new kakao.maps.LatLng(P_GPS.x, P_GPS.y); // 새로운 중심 좌표
         map.setCenter(newCenter);
         console.log(isUseGps)
