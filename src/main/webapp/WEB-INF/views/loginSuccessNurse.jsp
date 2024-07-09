@@ -8,60 +8,68 @@
 <link rel="stylesheet" href="../resources/CSS/web.css">
 <title>간호사 로그인</title>
 <style>
-	#patientList {
-		border: 1px solid lightgrey;
-		width: 100%;
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		width: 100%;
-	}
-	.controls {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 30px;
-		margin-top: 60px;
-	}
-	.controls input[type=button] {
-		width: 70px;
-		height: 70px;
-		font-size: 30px;
-		text-align: center;
-	}
-	#mapshell {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		height: 100%;
-		position: relative;
-	}
-	#map {
-		width: 100%;
-		height: 100%;
-	}
-	#outShell {
-		width: 100%;
-		height: 600px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		display: flex;
-	}
-	.patient {
-		text-align: center;
-		padding: 10px;
-		border-bottom: 1px solid #ccc;
-		border-right: 1px solid #ccc;
-		cursor: pointer; /* 클릭 가능한 요소로 설정 */
-	}
-	.patient:nth-child(4n) {
-		border-right: none;
-	}
-	.patient.clicked {
-		background-color: #4CAF50;
-		color: white;
-	}
+#patientList {
+	border: 1px solid lightgrey;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	width: 100%;
+}
+
+.controls {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+	margin-top: 60px;
+}
+
+.controls input[type=button] {
+	width: 70px;
+	height: 70px;
+	font-size: 30px;
+	text-align: center;
+}
+
+#mapshell {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+#map {
+	width: 100%;
+	height: 100%;
+}
+
+#outShell {
+	width: 100%;
+	height: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+
+.patient {
+	text-align: center;
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	cursor: pointer; /* 클릭 가능한 요소로 설정 */
+}
+
+.patient:nth-child(4n) {
+	border-right: none;
+}
+
+.patient.clicked {
+	background-color: #4CAF50;
+	color: white;
+}
 </style>
 </head>
 <body>
@@ -137,6 +145,7 @@
             var watchId = navigator.geolocation.watchPosition(	
                 // 위치 가져오기 성공 시 콜백 함수
                 function(position) {
+                    var lat = position.coords.latitude; // 위도
                     var lon = position.coords.longitude; // 경도
                     var markerPosition;
 
@@ -235,111 +244,144 @@
         
  
    
- // 환자 리스트를 가져오는 함수
-    function fetchPatients() {
-        fetch('/nurse/getPList', {
-            headers: {
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // 받은 데이터를 처리하여 화면에 표시
-            var patientList = document.getElementById("patientList");
-            patientList.innerHTML = ''; // 기존 리스트 초기화
+// 환자 리스트를 가져오는 함수
+function fetchPatients() {
+    fetch('/nurse/getPList', {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // 받은 데이터를 처리하여 화면에 표시
+        var patientList = document.getElementById("patientList");
+        patientList.innerHTML = ''; // 기존 리스트 초기화
 
-            data.forEach(patient => {
-                // 환자 이름을 추가할 div
-                var pName = document.createElement('div');
-                pName.classList.add('patient');
-                pName.innerText = patient.p_name;
-                patientList.appendChild(pName);
+        data.forEach(patient => {
+            // 환자 이름을 추가할 div
+            var pName = document.createElement('div');
+            pName.classList.add('patient');
+            pName.innerText = patient.p_name;
+            patientList.appendChild(pName);
 
-                // 환자 이름 클릭시 색깔 바뀜 및 p_no을 컨트롤러로 전달
-                // 클릭 이벤트 리스너 추가
-                pName.addEventListener('click', function() {
-                    // 모든 .patient 요소에서 clicked 클래스를 제거합니다
-                    document.querySelectorAll('.patient').forEach(function(p) {
-                        p.classList.remove('clicked');
-                    });
-
-                    // 클릭된 요소에만 clicked 클래스를 추가
-                    this.classList.add('clicked');
-
-                    // 선택된 환자의 p_no을 콘솔에 출력합니다
-                    var selectedPNo = patient.p_no;
-                    console.log('Selected Patient p_no:', selectedPNo);
-
-                    // 초기 호출
-                    fetchPatientDetails(selectedPNo);
-
-                    // 기존 interval이 있으면 제거
-                    if (window.currentInterval) {
-                        clearInterval(window.currentInterval);
-                    }
-
-                    // 2초마다 호출
+            // 환자 이름 클릭시 색깔 바뀜 및 p_no을 컨트롤러로 전달
+            // 클릭 이벤트 리스너 추가
+            pName.addEventListener('click', function() {
+                // 모든 .patient 요소에서 clicked 클래스를 제거합니다
+                document.querySelectorAll('.patient').forEach(function(p) {
+                    p.classList.remove('clicked');
+                });
+				
+                // 클릭된 요소에만 clicked 클래스를 추가
+                this.classList.add('clicked');
+              
+                // 선택된 환자의 p_no을 콘솔에 출력합니다
+                var selectedPNo = patient.p_no;
+                //console.log('Selected Patient p_no:', selectedPNo);
+				
+                // 초기 호출
+                fetchPatientDetails(selectedPNo);
+				
+             	// 기존 interval이 있으면 제거
+                if (window.currentInterval) {
+                    clearInterval(window.currentInterval);
+                }
+          	
+				
+                
+             // isUseGps 값에 따라 위치 정보를 들고와서 갱신 할지 아니면
+             // alert창을 띄우고 갱신하지 않을 지
+                if (isUseGps) {
+                    // 2초마다 호출     
                     window.currentInterval = setInterval(function() {
                         fetchPatientDetails(selectedPNo);
                     }, 2000);
-                });
+                } else {
+                    // isUseGps가 false일 때는 setInterval 멈춤
+                    clearInterval(window.currentInterval);
+                }
+                
+                
+               /*  // 2초마다 호출
+                window.currentInterval = setInterval(function() {
+                    fetchPatientDetails(selectedPNo);
+                }, 2000); */
             });
-        })
-        .catch(error => console.error('Error fetching patients:', error));
-    }
+        });
+    })
+    .catch(error => console.error('Error fetching patients:', error));
+}
 
-    // 환자 위치 정보를 가져오는 함수
-    function fetchPatientDetails(p_no) {
-        fetch('/nurse/getPatientGps?p_no=' + p_no, {
-            headers: {
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(P_GPS => {
-            // 가져온 환자 세부 정보를 처리하는 로직 추가
-            console.log('P_GPS', P_GPS);
 
-            // 기존의 마커가 있으면 지도에서 제거합니다
-            if (window.markerPgps) {
-                window.markerPgps.setMap(null);
-            }
+var isUseGps;
 
-            // 새로운 마커를 생성합니다
-            window.markerPgps = new kakao.maps.Marker({
-                position: new kakao.maps.LatLng(P_GPS.x, P_GPS.y),
-                map: window.map,
-            });
+// 환자 위치 정보를 가져오는 함수
+function fetchPatientDetails(p_no) {
+    fetch('/nurse/getPatientGps?p_no=' + p_no, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })   
+   	 .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })                                  
+    .then(P_GPS => {
+        isUseGps = false;
+        console.log(P_GPS);
+        // 가져온 환자 세부 정보를 처리하는 로직 추가
+        //console.log('P_GPS', P_GPS);
+		
+        // 기존의 마커가 있으면 지도에서 제거합니다
+        if (markerPgps) {
+            markerPgps.setMap(null);
+        }
 
-            window.markerPgps.setMap(window.map);
+        // 새로운 마커를 생성합니다
+        markerPgps = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(P_GPS.x, P_GPS.y),
+            map: map,
+        });
+		
+        markerPgps.setMap(map);
+        
+       
+        // 환자에 대한 정보 표시 박스
+        var iwContent = '<div style="padding:5px; width:200px; height:120px;">' +
+                        '<div style="font-size:14px; margin-bottom:10px;">이름: ' + P_GPS.p_name + '</div>' +
+                        '<div style="font-size:14px; margin-bottom:10px;">병실: ' + P_GPS.p_room + '</div>' +
+                        '<div style="font-size:14px; margin-bottom:10px;">전화번호: ' + P_GPS.p_phone + '</div>' +
+                        '<div style="font-size:14px;">보호자: ' + P_GPS.p_subPhone + '</div>' +
+                        '</div>';
+        iwPosition = new kakao.maps.LatLng(P_GPS.x, P_GPS.y); //인포윈도우 표시 위치입니다
 
-            // 환자에 대한 정보 표시 박스
-            var iwContent = '<div style="padding:5px; width:200px; height:120px;">' +
-                            '<div style="font-size:14px; margin-bottom:10px;">이름: ' + P_GPS.p_name + '</div>' +
-                            '<div style="font-size:14px; margin-bottom:10px;">병실: ' + P_GPS.p_room + '</div>' +
-                            '<div style="font-size:14px; margin-bottom:10px;">전화번호: ' + P_GPS.p_phone + '</div>' +
-                            '<div style="font-size:14px;">보호자: ' + P_GPS.p_subPhone + '</div>' +
-                            '</div>';
-            var iwPosition = new kakao.maps.LatLng(P_GPS.x, P_GPS.y); // 인포윈도우 표시 위치입니다
+        // 기존 인포윈도우가 있으면 닫습니다
+        if (currentInfowindow) {
+            currentInfowindow.close();
+        }
 
-            // 기존 인포윈도우가 있으면 닫습니다
-            if (window.currentInfowindow) {
-                window.currentInfowindow.close();
-            }
+        // 인포윈도우를 생성합니다
+        currentInfowindow = new kakao.maps.InfoWindow({
+            position : iwPosition,
+            content : iwContent
+        });
 
-            // 인포윈도우를 생성합니다
-            window.currentInfowindow = new kakao.maps.InfoWindow({
-                position: iwPosition,
-                content: iwContent
-            });
-
-            // 마커 위에 인포윈도우를 표시합니다
-            window.currentInfowindow.open(window.map, window.markerPgps);
-
-        })
-        .catch(error => console.error('Error fetching patient details:', error));
-    }
-
+        // 마커 위에 인포윈도우를 표시합니다
+        currentInfowindow.open(map, markerPgps);
+        
+        
+        newCenter = new kakao.maps.LatLng(P_GPS.x, P_GPS.y); // 새로운 중심 좌표
+        map.setCenter(newCenter);
+		
+    })
+    .catch(error => {
+        console.error('Error fetching and processing patient details:', error);
+        isUseGps = true;
+        alert('해당 사용자는 위치 서비스를 이용하지 않고 있습니다.');        		      
+    });
+}
 
 </script>
 </body>
