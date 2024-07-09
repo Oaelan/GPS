@@ -122,7 +122,7 @@
     // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
     var map = new kakao.maps.Map(node,mapOption)      
     var center = map.getCenter();
-    
+    var hCenter =  new kakao.maps.LatLng(35.54230, 129.3383);
  	// 새로운 중심 좌표 설정 현재 내위치가 움직일 때 지도도 따라 움직이게 
     var newCenter  
     // 지도 드래그 비활성화
@@ -282,30 +282,24 @@ function fetchPatients() {
                 // 초기 호출
                 fetchPatientDetails(selectedPNo);
 				
-             	// 기존 interval이 있으면 제거
+             
+				
+                
+                // 기존 interval이 있으면 제거
                 if (window.currentInterval) {
                     clearInterval(window.currentInterval);
                 }
-          	
-				
-                
-             // isUseGps 값에 따라 위치 정보를 들고와서 갱신 할지 아니면
-             // alert창을 띄우고 갱신하지 않을 지
-                if (isUseGps) {
-                    // 2초마다 호출     
-                    window.currentInterval = setInterval(function() {
-                        fetchPatientDetails(selectedPNo);
-                    }, 2000);
-                } else {
-                    // isUseGps가 false일 때는 setInterval 멈춤
-                    clearInterval(window.currentInterval);
-                }
-                
-                
-               /*  // 2초마다 호출
+
+                // 2초마다 호출
                 window.currentInterval = setInterval(function() {
-                    fetchPatientDetails(selectedPNo);
-                }, 2000); */
+                    if (isUseGps) {
+                        fetchPatientDetails(selectedPNo);
+                    } else {
+                        clearInterval(window.currentInterval);
+                    }
+                }, 2000);
+                
+            
             });
         });
     })
@@ -313,7 +307,7 @@ function fetchPatients() {
 }
 
 
-var isUseGps;
+var isUseGps = false;
 
 // 환자 위치 정보를 가져오는 함수
 function fetchPatientDetails(p_no) {
@@ -329,7 +323,7 @@ function fetchPatientDetails(p_no) {
         return response.json();
     })                                  
     .then(P_GPS => {
-        isUseGps = false;
+       	isUseGps =true;
         console.log(P_GPS);
         // 가져온 환자 세부 정보를 처리하는 로직 추가
         //console.log('P_GPS', P_GPS);
@@ -374,12 +368,28 @@ function fetchPatientDetails(p_no) {
         
         newCenter = new kakao.maps.LatLng(P_GPS.x, P_GPS.y); // 새로운 중심 좌표
         map.setCenter(newCenter);
+        console.log(isUseGps)
 		
     })
     .catch(error => {
+        console.log(isUseGps)
         console.error('Error fetching and processing patient details:', error);
-        isUseGps = true;
-        alert('해당 사용자는 위치 서비스를 이용하지 않고 있습니다.');        		      
+        isUseGps = false;
+        alert('해당 사용자는 위치 서비스를 이용하지 않고 있습니다.');
+        // 기존의 마커가 있으면 지도에서 제거합니다
+        if (markerPgps) {
+            markerPgps.setMap(null);
+            // 기존에 생성된 인포윈도우가 있다면 닫기
+            if (currentInfowindow) {
+                currentInfowindow.close();
+            }
+        } map.setCenter(hCenter);
+    	
+        // 모든 .patient 요소에서 clicked 클래스를 제거합니다
+        document.querySelectorAll('.patient').forEach(function(p) {
+            p.classList.remove('clicked');
+        });
+       
     });
 }
 
