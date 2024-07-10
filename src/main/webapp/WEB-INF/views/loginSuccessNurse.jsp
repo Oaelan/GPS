@@ -93,12 +93,9 @@
     document.addEventListener('DOMContentLoaded', function() {
     	 fetchPatients(); // 환자 리스트 가져오기/ 환자 위치 정보 가져오는  함수 호출 5초마다 실행
         getUserLocation(); // 간호사 현재 위치 마커    
-        
-        
+       
     });
-	 
-	
-    
+
     var path = "../resources/IMG/";
 	 
 	//watchId 선언
@@ -285,10 +282,8 @@ function fetchPatients() {
 				
                 // 초기 호출
                 fetchPatientDetails(selectedPNo);
-				
-             
-				
                 
+            	
                 // 기존 interval이 있으면 제거
                 if (window.currentInterval) {
                     clearInterval(window.currentInterval);
@@ -300,6 +295,7 @@ function fetchPatients() {
                         fetchPatientDetails(selectedPNo);
                     } else {
                         clearInterval(window.currentInterval);
+                        
                     }
                 }, 2000);
                 
@@ -328,7 +324,7 @@ function fetchPatientDetails(p_no) {
     })                                  
     .then(P_GPS => {
        	isUseGps =true;
-        console.log(P_GPS);
+       // console.log(P_GPS);
         // 가져온 환자 세부 정보를 처리하는 로직 추가
         //console.log('P_GPS', P_GPS);
 		
@@ -345,8 +341,9 @@ function fetchPatientDetails(p_no) {
 		
         markerPgps.setMap(map);
         
-       
-        // 환자에 대한 정보 표시 박스
+ 
+        
+   // 환자에 대한 정보 표시 박스
         var iwContent = '<div style="padding:5px; width:200px; height:120px;">' +
                         '<div style="font-size:14px; margin-bottom:10px;">이름: ' + P_GPS.p_name + '</div>' +
                         '<div style="font-size:14px; margin-bottom:10px;">병실: ' + P_GPS.p_room + '</div>' +
@@ -354,28 +351,45 @@ function fetchPatientDetails(p_no) {
                         '<div style="font-size:14px;">보호자: ' + P_GPS.p_subPhone + '</div>' +
                         '</div>';
         iwPosition = new kakao.maps.LatLng(P_GPS.x, P_GPS.y); //인포윈도우 표시 위치입니다
-
+ 
         // 기존 인포윈도우가 있으면 닫습니다
         if (currentInfowindow) {
             currentInfowindow.close();
         }
-
-        // 인포윈도우를 생성합니다
+		
+         // 인포윈도우를 생성합니다
         currentInfowindow = new kakao.maps.InfoWindow({
             position : iwPosition,
             content : iwContent
         });
 
-        currentInfowindow.open(map, markerPgps);
+        //currentInfowindow.open(map, markerPgps);  
+        
+        
+        var isInfoWindow = false;
+    	 // 마커에 마우스오버 이벤트를 등록합니다
+        kakao.maps.event.addListener(markerPgps, 'click', function() {
+          // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+          if(isInfoWindow){
+              currentInfowindow.close();
+              console.log("닫음",isInfoWindow)
+              isInfoWindow=true;
+          }else{
+              currentInfowindow.open(map, markerPgps);
+              isInfoWindow=false;
+              console.log("열음",)
+          }
+            
+        });
         
      	
         newCenter = new kakao.maps.LatLng(P_GPS.x, P_GPS.y); // 새로운 중심 좌표
         map.setCenter(newCenter);
-        console.log(isUseGps)
+        //console.log(isUseGps)
 		
     })
     .catch(error => {
-        console.log(isUseGps)
+       // console.log(isUseGps)
         console.error('Error fetching and processing patient details:', error);
         isUseGps = false;
         alert('해당 사용자는 위치 서비스를 이용하지 않고 있습니다.');
