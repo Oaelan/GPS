@@ -12,12 +12,7 @@
 <link rel="stylesheet" href="../resources/CSS/web.css">
 <style type="text/css">
 
-	.content {
-	    display: flex;
-	    width: 100vw;
-	    flex-direction: column;
-	    align-items: center;
-	}
+	
 	.text {
 		color: gray;
 		font-size: 13px;
@@ -55,9 +50,10 @@
 
 	#list{
 		display: flex;
-    	width: 100%;
-    	justify-content: center;
-    	align-items: center;
+	    width: 100%;
+	    justify-content: center;
+	    align-items: center;
+	    flex-direction: column;
 	}
 	.acceptL{    
 		display: flex;
@@ -69,7 +65,7 @@
 	}
 	
 	.acceptB{
-		width: 20%;
+		display:flex;
 	}    
 	
 	.acceptB>input{
@@ -89,7 +85,6 @@
 				<!-- 회원가입 신청한 간호사 목록 띄우기 -->
 				<c:forEach var="acceptList" items="${acceptList}">
 					<div class = "acceptL">
-					
 						<div>
 							${acceptList.id}
 						</div>

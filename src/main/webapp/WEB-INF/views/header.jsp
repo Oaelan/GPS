@@ -36,8 +36,8 @@
 		<c:if test="${loginedType != null}">
 			<li><a href="/loginSuccessNurse">담당 환자 찾기</a></li>
 		</c:if>
-		<c:if test="${loginedType.equals('master')}">
-			<li><a href="/introduce">의료진 가입 요청</a></li>
+		<c:if test="${userId.equals('master')}">
+			<li><a href="/masterPage">의료진 가입 요청</a></li>
 		</c:if>
 	</ul>
 </div>
