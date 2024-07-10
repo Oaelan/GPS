@@ -94,8 +94,20 @@
     	 fetchPatients(); // 환자 리스트 가져오기/ 환자 위치 정보 가져오는  함수 호출 5초마다 실행
         getUserLocation(); // 간호사 현재 위치 마커    
        
+        
+        
     });
-
+	
+	 // 환자 이름을 선택해 가져온 정보를 담는 객체
+	let pInfo ={
+	 name:"",
+	 room:"",
+	 phone:"",
+	 subPhone:"",
+	 x:"",
+	 y:"",
+	}
+   
     var path = "../resources/IMG/";
 	 
 	//watchId 선언
@@ -363,25 +375,8 @@ function fetchPatientDetails(p_no) {
             content : iwContent
         });
 
-        //currentInfowindow.open(map, markerPgps);  
-        
-        
-        var isInfoWindow = false;
-    	 // 마커에 마우스오버 이벤트를 등록합니다
-        kakao.maps.event.addListener(markerPgps, 'click', function() {
-          // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-          if(isInfoWindow){
-              currentInfowindow.close();
-              console.log("닫음",isInfoWindow)
-              isInfoWindow=true;
-          }else{
-              currentInfowindow.open(map, markerPgps);
-              isInfoWindow=false;
-              console.log("열음",)
-          }
-            
-        });
-        
+        currentInfowindow.open(map,markerPgps);
+    	
      	
         newCenter = new kakao.maps.LatLng(P_GPS.x, P_GPS.y); // 새로운 중심 좌표
         map.setCenter(newCenter);

@@ -104,7 +104,7 @@ public class MainController {
 					pgvo.setP_subPhone(p_subPhone);
 					pgvo.setP_room(p_room);
 					ls.addPGPSInfo(pgvo);
-					return "loginSuccessForEnterH";
+					return "redirect:/loginSuccessForEnterH";
 				} else {
 					return "loginSuccess";
 				}
