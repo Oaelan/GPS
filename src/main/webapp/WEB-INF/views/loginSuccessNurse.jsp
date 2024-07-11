@@ -97,17 +97,7 @@
         
         
     });
-	
-	 // 환자 이름을 선택해 가져온 정보를 담는 객체
-	let pInfo ={
-	 name:"",
-	 room:"",
-	 phone:"",
-	 subPhone:"",
-	 x:"",
-	 y:"",
-	}
-   
+
     var path = "../resources/IMG/";
 	 
 	//watchId 선언
